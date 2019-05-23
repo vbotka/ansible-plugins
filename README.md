@@ -10,6 +10,7 @@ Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible).
 
 ## Filter plugins
 
+- **hash_utils** see [Iterating a hash in an Ansible task](https://coderwall.com/p/rxsmvw/iterating-a-hash-in-an-ansible-task)
 - **sort_versions** see [How to sort complex version numbers in Ansible](https://stackoverflow.com/questions/56063612/how-to-sort-complex-version-numbers-in-ansible/).
 
 
