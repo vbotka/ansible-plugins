@@ -1,3 +1,4 @@
+---
 # Test filter_plugins/list_methods.py
 
 - hosts: localhost
@@ -52,4 +53,4 @@
         msg: "reverse sort fruits: {{ fruits|list_sort()|list_reverse() }}"
     - debug:
         msg: "copy fruits: {{ fruits|list_copy() }}"
-
+...

@@ -1,0 +1,25 @@
+---
+# Test filter_plugins/bool_utils.py
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    b1: [true, true, true]
+    b2: [false, false, false]
+    b3: [true, false, false]
+
+  tasks:
+    - debug:
+        msg: "all(b1): {{ b1|bool_and }}"
+    - debug:
+        msg: "all(b2): {{ b2|bool_and }}"
+    - debug:
+        msg: "all(b3): {{ b3|bool_and }}"
+    - debug:
+        msg: "any(b1): {{ b1|bool_or }}"
+    - debug:
+        msg: "any(b2): {{ b2|bool_or }}"
+    - debug:
+        msg: "any(b3): {{ b3|bool_or }}"
+...

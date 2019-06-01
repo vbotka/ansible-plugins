@@ -1,0 +1,20 @@
+---
+# Test filter_plugins/hash_utils
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    config:
+      key1: value1
+      key2: value2
+      key3: value3
+
+  tasks:
+    - debug:
+        msg: "list keys: {{ config|hash_keys }}"
+    - debug:
+        msg: "list values: {{ config|hash_values }}"
+    - debug:
+        msg: "list tuples: {{ config|hash_to_tuples }}"
+...
