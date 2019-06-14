@@ -13,34 +13,49 @@
         var: fruits
     - debug:
         msg: "list length: {{ fruits|length }}"
+      tags: lm_length
     - debug:
-        msg: "append 'tangerine': {{ fruits|list_append(x='tangerine') }}"
+        msg: "append 'tangerine': {{ fruits|list_append('tangerine') }}"
+      tags: lm_append
     - debug:
-        msg: "append 'vegetables': {{ fruits|list_append(x=vegetables) }}"
+        msg: "append 'vegetables': {{ fruits|list_append(vegetables) }}"
+      tags: lm_append
     - debug:
-        msg: "append 'vegetables' flatten: {{ fruits|list_append(x=vegetables)|flatten }}"
+        msg: "append 'vegetables' flatten: {{ fruits|list_append(vegetables)|flatten }}"
+      tags: lm_append
     - debug:
-        msg: "extend 'vegetables': {{ fruits|list_extend(x=vegetables) }}"
+        msg: "extend 'vegetables': {{ fruits|list_extend(vegetables) }}"
+      tags: lm_extend
     - debug:
-        msg: "insert plum at 3: {{ fruits|list_insert(i=3, x='plum') }}"
+        msg: "insert plum at 3: {{ fruits|list_insert(3, 'plum') }}"
+      tags: lm_extend
     - debug:
-        msg: "remove first banana: {{ fruits|list_remove(x='banana') }}"
+        msg: "remove first banana: {{ fruits|list_remove('banana') }}"
+      tags: lm_remove
     - debug:
         msg: "pop 2: {{ fruits|list_pop(2) }}"
+      tags: lm_pop
     - debug:
         msg: "pop last: {{ fruits|list_pop() }}"
+      tags: lm_pop
     - debug:
         msg: "clear: {{ fruits|list_clear() }}"
+      tags: lm_clear
     - debug:
         msg: "index of apple: {{ fruits|list_index('apple') }}"
+      tags: lm_index
     - debug:
         msg: "index of apple from 3: {{ fruits|list_index('apple', 3) }}"
+      tags: lm_index
     - debug:
         msg: "index of apple from 2 to 4: {{ fruits|list_index('apple', 2, 4) }}"
+      tags: lm_index
     - debug:
         msg: "count apple: {{ fruits|list_count('apple') }}"
+      tags: lm_count
     - debug:
         msg: "sort fruits: {{ fruits|list_sort() }}"
+      tags: lm_sort
     # 'str' is undefined
     # - debug:
     #     msg: "sort fruits by lenght: {{ fruits|list_sort(key=str.lower) }}"
@@ -49,8 +64,12 @@
     #     msg: "reverse sort fruits: {{ fruits|list_sort(reverse=true) }}"
     - debug:
         msg: "reverse fruits: {{ fruits|list_reverse() }}"
+      tags: lm_reverse
     - debug:
         msg: "reverse sort fruits: {{ fruits|list_sort()|list_reverse() }}"
+      tags: lm_sort
     - debug:
         msg: "copy fruits: {{ fruits|list_copy() }}"
+      tags: lm_copy
+
 ...
