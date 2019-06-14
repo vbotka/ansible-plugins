@@ -71,5 +71,8 @@
     - debug:
         msg: "copy fruits: {{ fruits|list_copy() }}"
       tags: lm_copy
+    - debug:
+        msg: "search *an* in fruits: {{ fruits|list_search('.*an.*') }}"
+      tags: lm_search
 
 ...
