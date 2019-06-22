@@ -1,7 +1,8 @@
 ---
 # Test filter_plugins/dict_utils
 
-- hosts: localhost
+- name: dict_utils
+  hosts: localhost
   gather_facts: no
 
   vars:
@@ -27,6 +28,16 @@
 
 
   tasks:
+    - debug:
+        var: merge_dict
+      vars:
+        merge_dict: "{{ dict1|dict_merge(dict2) }}"
+      tags: merge_dict
+    - debug:
+        var: merge_dict
+      vars:
+        merge_dict: "{{ dict1|dict_merge(dict3) }}"
+      tags: merge_dict
     - debug:
         var: added_hash
       vars:

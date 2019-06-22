@@ -58,6 +58,18 @@ def list_search(l, x):
     r = re.compile(x)
     return list(filter(r.match, l))
 
+def list_flatten(l):
+    flat_list = []
+    for sublist in l:
+        if isinstance(sublist, (list,)):
+            for item in sublist:
+                flat_list.append(item)
+        else:
+            flat_list.append(sublist)
+    l = flat_list
+    return l
+
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.
 
@@ -73,6 +85,7 @@ class FilterModule(object):
             'list_copy' : list_copy,
             'list_count' : list_count,
             'list_extend' : list_extend,
+            'list_flatten' : list_flatten,
             'list_index' : list_index,
             'list_insert' : list_insert,
             'list_pop' : list_pop,

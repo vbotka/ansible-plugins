@@ -1,6 +1,7 @@
 ---
 
-- hosts: localhost
+- name: string_filters
+  hosts: localhost
   gather_facts: no
   vars:
     input: [ "a", "b", "c" ]

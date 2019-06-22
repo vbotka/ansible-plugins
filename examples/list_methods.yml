@@ -1,7 +1,8 @@
 ---
 # Test filter_plugins/list_methods.py
 
-- hosts: localhost
+- name: list_methods
+  hosts: localhost
   gather_facts: no
 
   vars:

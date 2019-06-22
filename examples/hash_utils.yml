@@ -1,7 +1,8 @@
 ---
 # Test filter_plugins/hash_utils
 
-- hosts: localhost
+- name: hash_utils
+  hosts: localhost
   gather_facts: no
 
   vars:

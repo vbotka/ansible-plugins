@@ -1,7 +1,8 @@
 ---
-# Test filter_plugins/bool_utils.py
+# Test filter_plugins/bool_utils
 
-- hosts: localhost
+- name: bool_utils
+  hosts: localhost
   gather_facts: no
 
   vars:

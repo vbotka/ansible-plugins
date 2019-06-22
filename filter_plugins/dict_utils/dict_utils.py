@@ -2,6 +2,24 @@
 # All rights reserved.
 # Simplified BSD License
 
+# import list_methods
+
+def list_flatten(l):
+    flat_list = []
+    for sublist in l:
+        if isinstance(sublist, (list,)):
+            for item in sublist:
+                flat_list.append(item)
+        else:
+            flat_list.append(sublist)
+    l = flat_list
+    return l
+
+def dict_merge(x, y):
+    d = x.copy()
+    d.update(y)
+    return d
+
 def dict_add_hash(d, h, recursive=False):
     if recursive:
         for k, v in h.iteritems():
@@ -10,14 +28,7 @@ def dict_add_hash(d, h, recursive=False):
         for k, v in h.iteritems():
             d[k] = v
     if isinstance(d[k], (list,)):
-        flat_list = []
-        for sublist in d[k]:
-            if isinstance(sublist, (list,)):
-                for item in sublist:
-                    flat_list.append(item)
-            else:
-                 flat_list.append(sublist)
-        d[k] = flat_list
+        d[k] = list_flatten(d[k])
     return d
 
 def dict_del_key(d, key):
@@ -49,6 +60,7 @@ class FilterModule(object):
             'dict_add_hash' : dict_add_hash,
             'dict_del_key' : dict_del_key,
             'dict_keys' : dict_keys,
+            'dict_merge' : dict_merge,
             'dict_sorted' : dict_sorted,
             'dict_search_key' : dict_search_key,
             'dict_prefix_keys' : dict_prefix_keys

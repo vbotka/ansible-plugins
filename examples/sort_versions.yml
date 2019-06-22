@@ -1,7 +1,8 @@
 ---
 # Test filter_plugins/sort_versions
 
-- hosts: localhost
+- name: sort_versions
+  hosts: localhost
   gather_facts: no
 
   vars:
