@@ -14,6 +14,12 @@ def string_prefix(s, prefix):
 def string_postfix(s, postfix):
     return s + postfix
 
+def string_replace(s, old, new, *i):
+    if len(i) == 0:
+        return s.replace(old, new)
+    else:
+        return s.replace(old, new, i[0])
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python string methods.
 
@@ -26,5 +32,6 @@ class FilterModule(object):
             'string_count' : string_count,
             'string_find' : string_find,
             'string_prefix' : string_prefix,
-            'string_postfix' : string_postfix
+            'string_postfix' : string_postfix,
+            'string_replace' : string_replace
         }
