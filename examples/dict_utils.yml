@@ -25,6 +25,22 @@
       core_api: 7201
       stock_api: 7204
       import_export: 7207
+    dict4: {
+      "a":{
+        "r": 1,
+        "s": 2,
+        "t": 3
+        },
+      "b":{
+        "u": 1,
+        "v": {
+            "x": 1,
+            "y": 2,
+            "z": [ 3, 4, 5 ]
+          },
+        "w": 3
+        }
+      }
 
 
   tasks:
@@ -63,3 +79,8 @@
       vars:
         prefixed_keys: "{{ ports|dict_prefix_keys('staging_') }}"
       tags: prefixed_keys
+    - debug:
+        var: dict4_flatten
+      vars:
+        dict4_flatten: "{{ dict4|dict_flatten('.') }}"
+      tags: dict_flatten
