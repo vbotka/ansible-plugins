@@ -44,6 +44,19 @@
 
 
   tasks:
+
+    - debug:
+        var: added_hash
+      vars:
+        added_hash: "{{ dict1|dict_add_hash(add_this) }}"
+      tags: added_hash
+
+    - debug:
+        var: del_key
+      vars:
+        del_key: "{{ dict2|dict_del_key('b') }}"
+      tags: del_key
+
     - debug:
         var: merge_dict
       vars:
@@ -54,31 +67,31 @@
       vars:
         merge_dict: "{{ dict1|dict_merge(dict3) }}"
       tags: merge_dict
-    - debug:
-        var: added_hash
-      vars:
-        added_hash: "{{ dict1|dict_add_hash(add_this) }}"
-      tags: added_hash
+
     - debug:
         var: appended_hash
       vars:
         appended_hash: "{{ dict2|dict_add_hash(add_this, True) }}"
       tags: appended_hash
+
     - debug:
         var: replaced_hash
       vars:
         replaced_hash: "{{ dict2|dict_add_hash(add_this) }}"
       tags: replaced_hash
+
     - debug:
         var: appended_hash_to_list
       vars:
         appended_hash_to_list: "{{ dict3|dict_add_hash(add_this, True) }}"
       tags: appended_hash_to_list
+
     - debug:
         var: prefixed_keys
       vars:
         prefixed_keys: "{{ ports|dict_prefix_keys('staging_') }}"
       tags: prefixed_keys
+
     - debug:
         var: dict4_flatten
       vars:
