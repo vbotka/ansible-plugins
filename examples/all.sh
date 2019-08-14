@@ -10,3 +10,4 @@ ansible-playbook hash_utils.yml
 ansible-playbook list_methods.yml
 ansible-playbook sort_versions.yml
 ansible-playbook string_filters.yml
+ansible-playbook file_filters.yml
