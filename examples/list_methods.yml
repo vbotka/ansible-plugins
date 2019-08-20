@@ -3,7 +3,7 @@
 
 - name: list_methods
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     fruits: ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
@@ -22,7 +22,9 @@
         msg: "append 'vegetables': {{ fruits|list_append(vegetables) }}"
       tags: lm_append
     - debug:
-        msg: "append 'vegetables' flatten: {{ fruits|list_append(vegetables)|flatten }}"
+        msg: "append 'vegetables' flatten: {{ fruits|
+                                              list_append(vegetables)|
+                                              flatten }}"
       tags: lm_append
     - debug:
         msg: "extend 'vegetables': {{ fruits|list_extend(vegetables) }}"
@@ -46,10 +48,12 @@
         msg: "index of apple: {{ fruits|list_index('apple') }}"
       tags: lm_index
     - debug:
-        msg: "index of apple from 3: {{ fruits|list_index('apple', 3) }}"
+        msg: "index of apple from 3: {{ fruits|
+                                        list_index('apple', 3) }}"
       tags: lm_index
     - debug:
-        msg: "index of apple from 2 to 4: {{ fruits|list_index('apple', 2, 4) }}"
+        msg: "index of apple from 2 to 4: {{ fruits|
+                                             list_index('apple', 2, 4) }}"
       tags: lm_index
     - debug:
         msg: "count apple: {{ fruits|list_count('apple') }}"

@@ -3,7 +3,7 @@
 
 - name: dict_utils
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     dict1:
@@ -30,17 +30,17 @@
         "r": 1,
         "s": 2,
         "t": 3
-        },
+      },
       "b":{
         "u": 1,
         "v": {
-            "x": 1,
-            "y": 2,
-            "z": [ 3, 4, 5 ]
-          },
+          "x": 1,
+          "y": 2,
+          "z": [3, 4, 5]
+        },
         "w": 3
-        }
       }
+    }
     dict5:
       c:
         ip: 10.1.0.19

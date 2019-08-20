@@ -2,9 +2,9 @@
 
 - name: string_filters
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
   vars:
-    input: [ "a", "b", "c" ]
+    input: ["a", "b", "c"]
     test1: The quick brown fox jumps over the lazy dog
   tasks:
     - debug:

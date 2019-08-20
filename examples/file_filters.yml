@@ -3,7 +3,7 @@
 
 - name: file_filters
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     test_string: "test string"

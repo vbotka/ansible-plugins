@@ -3,7 +3,7 @@
 
 - name: sort_versions
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     versions:

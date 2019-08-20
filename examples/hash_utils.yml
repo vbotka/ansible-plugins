@@ -3,7 +3,7 @@
 
 - name: hash_utils
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   vars:
     config:
