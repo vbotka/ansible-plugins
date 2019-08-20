@@ -41,7 +41,16 @@
         "w": 3
         }
       }
-
+    dict5:
+      c:
+        ip: 10.1.0.19
+        mac: 88:88:88:88:88:80
+      a:
+        ip: 10.1.0.17
+        mac: 88:88:88:88:88:81
+      b:
+        ip: 10.1.0.18
+        mac: 88:88:88:88:88:82
 
   tasks:
 
@@ -97,3 +106,9 @@
       vars:
         dict4_flatten: "{{ dict4|dict_flatten('.') }}"
       tags: dict_flatten
+
+    - debug:
+        var: dict5_sortbysubkey
+      vars:
+        dict5_sortbysubkey: "{{ dict5|dict_sortbysubkey('ip') }}"
+      tags: dict_sortbysubkey

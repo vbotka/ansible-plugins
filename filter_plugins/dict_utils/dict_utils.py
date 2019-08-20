@@ -96,6 +96,9 @@ def dict_flatten(d, separator='.'):
     flatten(d)
     return out
 
+def dict_sortbysubkey(d, k):
+    return sorted(d.items(), key=lambda x: x[1][k])
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python dictionary methods.
 
@@ -111,5 +114,6 @@ class FilterModule(object):
             'dict_sorted' : dict_sorted,
             'dict_search_key' : dict_search_key,
             'dict_prefix_keys' : dict_prefix_keys,
-            'dict_flatten': dict_flatten
+            'dict_flatten': dict_flatten,
+            'dict_sortbysubkey': dict_sortbysubkey
         }
