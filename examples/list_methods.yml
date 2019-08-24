@@ -79,5 +79,15 @@
     - debug:
         msg: "search *an* in fruits: {{ fruits|list_search('.*an.*') }}"
       tags: lm_search
+    - debug:
+        msg: "1st 3 random samples from fruits: {{ fruits|
+                                                   unique|
+                                                   list_sample(3|int) }}"
+      tags: lm_sample
+    - debug:
+        msg: "2nd 3 random samples from fruits: {{ fruits|
+                                                   unique|
+                                                   list_sample(3|int) }}"
+      tags: lm_sample
 
 ...
