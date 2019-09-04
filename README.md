@@ -18,6 +18,9 @@ Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible). Se
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
 - **file_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/file_filters.yml)
 
+## Inventory plugins
+
+- **ip_based_groups** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/inventory-ip_based_groups.sh)
 
 ## References
 

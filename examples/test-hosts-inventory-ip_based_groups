@@ -1,0 +1,3 @@
+test_01 ansible_host=10.1.0.51
+test_02 ansible_host=10.1.0.52
+test_03 ansible_host=10.1.0.53
