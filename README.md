@@ -5,7 +5,8 @@ Various Ansbile plugins.
 
 ## Installation
 
-Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible). See [example](https://github.com/vbotka/ansible-ansible/blob/master/vars/main.yml).
+- Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible) to install selected plugins.
+- See [example](https://github.com/vbotka/ansible-ansible/blob/master/vars/main.yml).
 
 
 ## Filter plugins
@@ -17,6 +18,7 @@ Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible). Se
 - **sort_versions** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/sort_versions.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
 - **file_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/file_filters.yml)
+- **datetime_filters** see [examples]((https://github.com/vbotka/ansible-plugins/blob/master/examples/datetime_filters.yml)
 
 ## Inventory plugins
 
@@ -26,6 +28,7 @@ Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible). Se
 
 - [Working With Plugins](https://docs.ansible.com/ansible/latest/plugins/plugins.html#working-with-plugins)
 - [bool - Built-in Functions](https://docs.python.org/3/library/functions.html)
+- [datetime - Basic date and time types](https://docs.python.org/3/library/datetime.html)
 - [dict - Rename a dictionary key](https://stackoverflow.com/questions/16475384/rename-a-dictionary-key)
 - [dict - 5.5. Dictionaries docs.python.org](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
 - [hash - Iterating a hash in an Ansible task](https://coderwall.com/p/rxsmvw/iterating-a-hash-in-an-ansible-task)

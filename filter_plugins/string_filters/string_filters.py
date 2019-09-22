@@ -1,6 +1,5 @@
-# (c) 2019, Vladimir Botka <vbotka@gmail.com>
-# All rights reserved.
-# Simplified BSD License
+# All rights reserved (c) 2019, Vladimir Botka <vbotka@gmail.com>
+# Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
 def string_count(s, sub):
     return s.count(sub)
