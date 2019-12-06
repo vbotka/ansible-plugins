@@ -20,6 +20,14 @@ def dict_merge(x, y):
     d.update(y)
     return d
 
+def dict_merge_lossless(x, y):
+    d = x.copy()
+    d.update(y)
+    for key, value in d.items():
+       if key in x and key in y:
+               d[key] = [value , x[key]]
+    return d
+
 def dict_add_hash(d, h, recursive=False):
     if recursive:
         for k, v in h.iteritems():
@@ -85,6 +93,7 @@ class FilterModule(object):
             'dict_del_key' : dict_del_key,
             'dict_keys' : dict_keys,
             'dict_merge' : dict_merge,
+            'dict_merge_lossless' : dict_merge_lossless,
             'dict_sorted' : dict_sorted,
             'dict_search_key' : dict_search_key,
             'dict_prefix_keys' : dict_prefix_keys,

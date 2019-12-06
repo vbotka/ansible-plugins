@@ -78,6 +78,12 @@
       tags: merge_dict
 
     - debug:
+        var: merge_dict_lossless
+      vars:
+        merge_dict_lossless: "{{ dict1|dict_merge_lossless(dict3) }}"
+      tags: merge_dict_lossless
+
+    - debug:
         var: appended_hash
       vars:
         appended_hash: "{{ dict2|dict_add_hash(add_this, True) }}"
