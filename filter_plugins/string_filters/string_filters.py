@@ -19,6 +19,14 @@ def string_replace(s, old, new, *i):
     else:
         return s.replace(old, new, i[0])
 
+def string_split(s, *i):
+    if len(i) == 0:
+        return s.split()
+    elif len(i) == 1:
+        return s.split(i[0])
+    else:
+        return s.split(i[0], i[1])
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python string methods.
 
@@ -32,5 +40,6 @@ class FilterModule(object):
             'string_find' : string_find,
             'string_prefix' : string_prefix,
             'string_postfix' : string_postfix,
-            'string_replace' : string_replace
+            'string_replace' : string_replace,
+            'string_split' : string_split
         }

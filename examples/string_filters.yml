@@ -6,6 +6,7 @@
   vars:
     input: ["a", "b", "c"]
     test1: The quick brown fox jumps over the lazy dog
+    test2: The quick,brown fox,jumps over,the lazy dog
   tasks:
     - debug:
         msg: "{{ lookup('file', 'test.txt')|string_count('phrase') }}"
@@ -15,16 +16,28 @@
         msg: "{{ 'abc'|string_postfix('-postfix') }}"
     - debug:
         msg: "{{ 'abc'|string_prefix('prefix-') }}"
-    - set_fact:
+    - debug:
+        var: output
+      vars:
         output: "{{ input|map('string_prefix', 'prefix-')|list }}"
     - debug:
         var: output
-    - set_fact:
+      vars:
         output: "{{ input|map('string_postfix', '-postfix')|list }}"
-    - debug:
-        var: output
     - debug:
         msg: "{{ test1|string_replace(' ', '-') }}"
     - debug:
         msg: "{{ test1|string_replace(' ', '-', 3) }}"
+    - debug:
+        var: split_text
+      vars:
+        split_text: "{{ test1|string_split() }}"
+    - debug:
+        var: split_text_comma
+      vars:
+        split_text_comma: "{{ test2|string_split(',') }}"
+    - debug:
+        var: split_text_comma2
+      vars:
+        split_text_comma2: "{{ test2|string_split(',',2) }}"
 ...
