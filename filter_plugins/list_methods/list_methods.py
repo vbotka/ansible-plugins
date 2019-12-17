@@ -72,6 +72,15 @@ def list_flatten(l):
 def list_sample(l,n):
     return random.sample(l,n)
 
+def list_zip(l,k):
+    return zip(l,k)
+
+def list_dict_zip(l,k):
+    return dict((x,y) for x,y in  zip(l,k))
+
+def list_dict_zip_rev(l,k):
+    return dict((y,x) for x,y in  zip(l,k))
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.
 
@@ -95,5 +104,8 @@ class FilterModule(object):
             'list_reverse' : list_reverse,
             'list_search' : list_search,
             'list_sort' : list_sort,
-            'list_sample' : list_sample
+            'list_sample' : list_sample,
+            'list_zip' : list_zip,
+            'list_dict_zip' : list_dict_zip,
+            'list_dict_zip_rev' : list_dict_zip_rev
         }

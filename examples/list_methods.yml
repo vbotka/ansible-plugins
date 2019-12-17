@@ -89,5 +89,17 @@
                                                    unique|
                                                    list_sample(3|int) }}"
       tags: lm_sample
+    - debug:
+        msg: "zip: {{ fruits|
+                      list_zip(vegetables) }}"
+      tags: lm_zip
+    - debug:
+        msg: "dict_zip: {{ fruits|
+                           list_dict_zip(vegetables) }}"
+      tags: lm_dict_zip
+    - debug:
+        msg: "dict_zip_rev: {{ fruits|
+                               list_dict_zip_rev(vegetables) }}"
+      tags: lm_dict_zip_rev
 
 ...
