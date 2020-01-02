@@ -51,6 +51,11 @@
       b:
         ip: 10.1.0.18
         mac: 88:88:88:88:88:82
+    list1: ["key1", "value1"]
+    list2:
+      - ["key1", "value1"]
+      - ["key2", "value2"]
+      - ["key3", "value3"]
 
   tasks:
 
@@ -118,3 +123,27 @@
       vars:
         dict5_sortbysubkey: "{{ dict5|dict_sortbysubkey('ip') }}"
       tags: dict_sortbysubkey
+
+    - debug:
+        var: dict1_2list
+      vars:
+        dict1_2list: "{{ dict1|dict2list }}"
+      tags: dict1_2list
+
+    - debug:
+        var: list1_2dict
+      vars:
+        list1_2dict: "{{ list1|item2dict }}"
+      tags: list1_2dict
+
+    - debug:
+        var: list2_2dict
+      vars:
+        list2_2dict: "{{ list2|map('item2dict')|list }}"
+      tags: list2_2dict
+
+    - debug:
+        var: list2_2dict
+      vars:
+        list2_2dict: "{{ dict(list2) }}"
+      tags: list2_2dict
