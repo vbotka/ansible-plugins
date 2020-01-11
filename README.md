@@ -17,7 +17,7 @@ Various Ansbile plugins.
 - **file_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/file_filters.yml)
 - **hash_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_tools.yml)
 - **list_methods** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_methods.yml)
-- **sort_versions** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/sort_versions.yml)
+- **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
 
 ## Inventory plugins
