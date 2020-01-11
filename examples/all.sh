@@ -9,7 +9,7 @@ ansible-playbook bool_utils.yml
 ansible-playbook dict_utils.yml
 ansible-playbook hash_utils.yml
 ansible-playbook list_methods.yml
-ansible-playbook sort_versions.yml
+ansible-playbook version_filters.yml
 ansible-playbook string_filters.yml
 ansible-playbook file_filters.yml
 ansible-playbook datetime_filters.yml
