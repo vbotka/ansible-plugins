@@ -15,7 +15,7 @@ Various Ansbile plugins.
 - **datetime_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/datetime_filters.yml)
 - **dict_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/dict_utils.yml)
 - **file_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/file_filters.yml)
-- **hash_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_tools.yml)
+- **hash_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_utils.yml)
 - **list_methods** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_methods.yml)
 - **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
