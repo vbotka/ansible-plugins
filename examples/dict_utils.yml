@@ -60,10 +60,10 @@
   tasks:
 
     - debug:
-        var: added_hash
+        var: added_dict
       vars:
-        added_hash: "{{ dict1|dict_add_hash(add_this) }}"
-      tags: added_hash
+        added_dict: "{{ dict1|dict_add_dict(add_this) }}"
+      tags: added_dict
 
     - debug:
         var: del_key
@@ -89,22 +89,22 @@
       tags: merge_dict_lossless
 
     - debug:
-        var: appended_hash
+        var: appended_dict
       vars:
-        appended_hash: "{{ dict2|dict_add_hash(add_this, True) }}"
-      tags: appended_hash
+        appended_dict: "{{ dict2|dict_add_dict(add_this, True) }}"
+      tags: appended_dict
 
     - debug:
-        var: replaced_hash
+        var: replaced_dict
       vars:
-        replaced_hash: "{{ dict2|dict_add_hash(add_this) }}"
-      tags: replaced_hash
+        replaced_dict: "{{ dict2|dict_add_dict(add_this) }}"
+      tags: replaced_dict
 
     - debug:
-        var: appended_hash_to_list
+        var: appended_dict_to_list
       vars:
-        appended_hash_to_list: "{{ dict3|dict_add_hash(add_this, True) }}"
-      tags: appended_hash_to_list
+        appended_dict_to_list: "{{ dict3|dict_add_dict(add_this, True) }}"
+      tags: appended_dict_to_list
 
     - debug:
         var: prefixed_keys
@@ -115,7 +115,12 @@
     - debug:
         var: dict4_flatten
       vars:
-        dict4_flatten: "{{ dict4|dict_flatten('.') }}"
+        dict4_flatten: "{{ dict4|dict_flatten }}"
+      tags: dict_flatten
+    - debug:
+        var: dict4_flatten
+      vars:
+        dict4_flatten: "{{ dict4|dict_flatten(separator='_') }}"
       tags: dict_flatten
 
     - debug:
@@ -147,3 +152,15 @@
       vars:
         list2_2dict: "{{ dict(list2) }}"
       tags: list2_2dict
+
+    - debug:
+        var: dict_select_list
+      vars:
+        dict_select_list: "{{ dict5|dict_select_list(['b', 'c']) }}"
+      tags: dict_select_list
+
+    - debug:
+        var: dict2hash
+      vars:
+        dict2hash: "{{ dict4|dict2hash }}"
+      tags: dict2hash

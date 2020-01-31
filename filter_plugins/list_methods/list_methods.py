@@ -81,6 +81,29 @@ def list_dict_zip(l,k):
 def list_dict_zip_rev(l,k):
     return dict((y,x) for x,y in  zip(l,k))
 
+def list_split_period(l, p):
+    split_list = []
+    for i in range(p, len(l)+p, p):
+        if i == p:
+            split_list.append(l[0:p])
+        elif i > len(l):
+            split_list.append(l[j:])
+        else:
+            split_list.append(l[j:i])
+        j = i
+    return split_list
+
+def list_select_list_bool(b, l, negative=False):
+    l2=[]
+    for bi,li in zip(b,l):
+        if negative:
+            if not bi:
+                l2.append(li)
+        else:
+            if bi:
+                l2.append(li)
+    return l2
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.
 
@@ -91,21 +114,23 @@ class FilterModule(object):
 
     def filters(self):
         return {
-            'list_append' : list_append,
-            'list_clear' : list_clear,
-            'list_copy' : list_copy,
-            'list_count' : list_count,
-            'list_extend' : list_extend,
-            'list_flatten' : list_flatten,
-            'list_index' : list_index,
-            'list_insert' : list_insert,
-            'list_pop' : list_pop,
-            'list_remove' : list_remove,
-            'list_reverse' : list_reverse,
-            'list_search' : list_search,
-            'list_sort' : list_sort,
-            'list_sample' : list_sample,
-            'list_zip' : list_zip,
-            'list_dict_zip' : list_dict_zip,
-            'list_dict_zip_rev' : list_dict_zip_rev
+            'list_append': list_append,
+            'list_clear': list_clear,
+            'list_copy': list_copy,
+            'list_count': list_count,
+            'list_extend': list_extend,
+            'list_flatten': list_flatten,
+            'list_index': list_index,
+            'list_insert': list_insert,
+            'list_pop': list_pop,
+            'list_remove': list_remove,
+            'list_reverse': list_reverse,
+            'list_search': list_search,
+            'list_sort': list_sort,
+            'list_sample': list_sample,
+            'list_zip': list_zip,
+            'list_dict_zip': list_dict_zip,
+            'list_dict_zip_rev': list_dict_zip_rev,
+            'list_split_period': list_split_period,
+            'list_select_list_bool': list_select_list_bool
         }

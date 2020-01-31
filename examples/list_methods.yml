@@ -8,6 +8,7 @@
   vars:
     fruits: ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
     vegetables: ['potato', 'tomato', 'carrot']
+    select_bool7: [false, true, true, false, false, true, false]
 
   tasks:
     - debug:
@@ -89,17 +90,39 @@
                                                    unique|
                                                    list_sample(3|int) }}"
       tags: lm_sample
+
     - debug:
         msg: "zip: {{ fruits|
                       list_zip(vegetables) }}"
       tags: lm_zip
+
     - debug:
         msg: "dict_zip: {{ fruits|
                            list_dict_zip(vegetables) }}"
       tags: lm_dict_zip
+
     - debug:
         msg: "dict_zip_rev: {{ fruits|
                                list_dict_zip_rev(vegetables) }}"
       tags: lm_dict_zip_rev
+
+    - debug:
+        msg: "list_split_period: {{ fruits|list_split_period(2) }}"
+      tags: lm_split_period
+    - debug:
+        msg: "list_split_period: {{ fruits|list_split_period(3) }}"
+      tags: lm_split_period
+    - debug:
+        msg: "list_split_period: {{ fruits|list_split_period(4) }}"
+      tags: lm_split_period
+
+    - debug:
+        msg: "list_select_list_bool: {{ select_bool7|
+                                        list_select_list_bool(fruits) }}"
+      tags: lm_select_list_bool
+    - debug:
+        msg: "list_select_list_bool: {{ select_bool7|
+                                        list_select_list_bool(fruits, negative=True) }}"
+      tags: lm_select_list_bool_negative
 
 ...
