@@ -1,7 +1,7 @@
 ---
-# Test filter_plugins/hash_utils
+# Test filter_plugins/hash_filters
 
-- name: hash_utils
+- name: hash_filters
   hosts: localhost
   gather_facts: false
 

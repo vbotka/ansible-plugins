@@ -1,7 +1,7 @@
 ---
-# Test filter_plugins/dict_utils
+# Test filter_plugins/dict_filters
 
-- name: dict_utils
+- name: dict_filters
   hosts: localhost
   gather_facts: false
 
