@@ -11,12 +11,12 @@ Various Ansbile plugins.
 
 ## Filter plugins
 
-- **bool_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/bool_utils.yml)
+- **bool_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/bool_filters.yml)
 - **datetime_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/datetime_filters.yml)
-- **dict_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/dict_utils.yml)
+- **dict_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/dict_filters.yml)
 - **file_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/file_filters.yml)
-- **hash_utils** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_utils.yml)
-- **list_methods** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_methods.yml)
+- **hash_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_filters.yml)
+- **list_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_filters.yml)
 - **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
 
@@ -34,6 +34,8 @@ Various Ansbile plugins.
 - [file - How to search for a string in text files?](https://stackoverflow.com/questions/4940032/how-to-search-for-a-string-in-text-files)
 - [hash - Iterating a hash in an Ansible task](https://coderwall.com/p/rxsmvw/iterating-a-hash-in-an-ansible-task)
 - [list - More on Lists](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)
+- [list - Sorting HOW TO](https://docs.python.org/3/howto/sorting.html#sortinghowto)
+- [list - Ways to sort list of dictionaries by values in Python – Using lambda function](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/)
 - [sort - How to sort complex version numbers in Ansible](https://stackoverflow.com/questions/56063612/how-to-sort-complex-version-numbers-in-ansible/)
 - [string - String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
 

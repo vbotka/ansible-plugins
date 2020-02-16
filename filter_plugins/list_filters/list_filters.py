@@ -1,8 +1,9 @@
-# All rights reserved (c) 2019, Vladimir Botka <vbotka@gmail.com>
+# All rights reserved (c) 2019-2020, Vladimir Botka <vbotka@gmail.com>
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
 import re
 import random
+from operator import itemgetter, attrgetter
 
 def list_append(l, x=''):
     l.append(x)
@@ -42,9 +43,14 @@ def list_index(l, x, *i):
 def list_count(l, x):
     return l.count(x)
  
-def list_sort(l, my_key=None, my_reverse=False):
-    l.sort(key=my_key, reverse=my_reverse)
-    return l
+def list_sort(l, ls_key=None, ls_reverse=False):
+    return sorted(l, key = ls_key, reverse = ls_reverse)
+
+def list_sort_list(l, index, ls_reverse=False):
+    return sorted(l, key = itemgetter(index), reverse = ls_reverse)
+
+def list_sort_dict(l, attr, ls_reverse=False):
+    return sorted(l, key = lambda i: i[attr], reverse = ls_reverse)
 
 def list_reverse(l):
     l.reverse()
@@ -127,6 +133,8 @@ class FilterModule(object):
             'list_reverse': list_reverse,
             'list_search': list_search,
             'list_sort': list_sort,
+            'list_sort_list': list_sort_list,
+            'list_sort_dict': list_sort_dict,
             'list_sample': list_sample,
             'list_zip': list_zip,
             'list_dict_zip': list_dict_zip,
