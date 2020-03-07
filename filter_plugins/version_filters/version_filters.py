@@ -14,9 +14,7 @@ def version_min(l):
 
 
 class FilterModule(object):
-    ''' Ansible filters.
-
-        Version filters.'''
+    ''' Ansible filters for operating on versions '''
 
 
     def filters(self):

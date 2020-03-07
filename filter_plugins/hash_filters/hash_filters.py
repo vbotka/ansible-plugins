@@ -20,7 +20,7 @@ def hash_values(h):
     return h.values()
 
 class FilterModule(object):
-    ''' utility filters for operating on hashes '''
+    ''' Ansible filters for operating on hashes '''
 
     def filters(self):
         return {

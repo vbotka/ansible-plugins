@@ -5,6 +5,7 @@ export ANSIBLE_STDOUT_CALLBACK=actionable
 #export ANSIBLE_STDOUT_CALLBACK=stderr
 
 # Filter plugins
+ansible-playbook acme_filters.yml
 ansible-playbook bool_filters.yml
 ansible-playbook dict_filters.yml
 ansible-playbook hash_filters.yml

@@ -1,0 +1,69 @@
+---
+# Test filter_plugins/acme_filters
+
+- name: acme_filters
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+
+    pk_json_file: "files/private_key.json"
+    pk_asn1_file: "files/private_key.asn1"
+    pk_der_file: "files/private_key.der"
+    pk_pem_file: "files/private_key.pem"
+
+  tasks:
+
+    - name: "Convert ACME private key from JSON to ASN1."
+      block:
+        - name: "acme_pk: Read JSON"
+          set_fact:
+            pk_json: "{{ lookup('file', pk_json_file) }}"
+        - name: "acme_pk: Display JSON"
+          debug:
+            msg: "{{ pk_json }}"
+        - name: "acme_pk: Conver JSON to ASN1"
+          set_fact:
+            pk_asn1: "{{ pk_json|acme_pk_json2asn1 }}"
+        - name: "acme_pk: Display ASN1"
+          debug:
+            msg: "{{ pk_asn1.split('\n') }}"
+        - name: "acme_pk: Write pk_asn1 to file"
+          template:
+            src: pk_asn1_file.j2
+            dest: "{{ pk_asn1_file }}"
+            mode: "0600"
+      tags: acme_pk_asn1
+
+    - name: "Convert ACME private key from ASN1 to DER."
+      block:
+        - name: "acme_pk: Touch pk_der_file, mode 0600"
+          file:
+            state: touch
+            path: "{{ pk_der_file }}"
+            mode: "0600"
+          changed_when: false
+        - name: "acme_pk: Convert ASN1 to DER. Read pk_asn1_file and write private key to pk_der_file"
+          set_fact:
+            result: "{{ pk_asn1_file|acme_pk_asn12der(pk_der_file) }}"
+        - name: "acme_pk: Display result of acme_pk_asn12der"
+          debug:
+            var: result
+      tags: acme_pk_der
+
+    - name: "Convert ACME private key from DER to PEM."
+      block:
+        - name: "acme_pk: Convert DER to PEM. Read pk_der_file and set pk_pem"
+          set_fact:
+            pk_pem: "{{ pk_der_file|acme_pk_der2pem() }}"
+        - name: "acme_pk: Display pk_pem"
+          debug:
+            msg: "{{ pk_pem.split('\n') }}"
+        - name: "acme_pk: Write pk_pem to pk_pem_file"
+          template:
+            src: pk_pem_file.j2
+            dest: "{{ pk_pem_file }}"
+            mode: "0600"
+      tags: acme_pk_pem
+
+...

@@ -11,6 +11,7 @@ Various Ansbile plugins.
 
 ## Filter plugins
 
+- **acme_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/acme_filters.yml)
 - **bool_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/bool_filters.yml)
 - **datetime_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/datetime_filters.yml)
 - **dict_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/dict_filters.yml)
@@ -27,6 +28,13 @@ Various Ansbile plugins.
 ## References
 
 - [Working With Plugins](https://docs.ansible.com/ansible/latest/plugins/plugins.html#working-with-plugins)
+- [acme - ACME: Automatic Certificate Management Environment RFC 8555](https://tools.ietf.org/html/rfc8555)
+- [acme - Letsencrypt: Certificate Authority providing TLS certificates](https://letsencrypt.org/)
+- [acme - Certbot: Software tool for automatically using Lets Encrypt certificates](https://certbot.eff.org/)
+- [acme - ASN1: Abstract Syntax Notation One](https://www.oss.com/asn1/resources/standards-define-asn1.html)
+- [acme - DER vs. CRT vs. CER vs. PEM Certificates and How To Convert Them](https://support.ssl.com/Knowledgebase/Article/View/19/0/der-vs-crt-vs-cer-vs-pem-certificates-and-how-to-convert-them)
+- [acme - pyOpenSSL: Wrapper around (a subset of) the OpenSSL library](https://www.pyopenssl.org/en/stable/)
+- [acme - cryptography: Interfaces to common cryptographic algorithms in Python](https://cryptography.io/en/latest/)
 - [bool - Built-in Functions](https://docs.python.org/3/library/functions.html)
 - [datetime - Basic date and time types](https://docs.python.org/3/library/datetime.html)
 - [dict - Rename a dictionary key](https://stackoverflow.com/questions/16475384/rename-a-dictionary-key)
