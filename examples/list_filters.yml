@@ -18,6 +18,9 @@
     vegetables: ['potato', 'tomato', 'carrot']
     select_bool7: [false, true, true, false, false, true, false]
     students: [['john', 'A', 15], ['jane', 'B', 12], ['dave', 'B', 10]]
+    list1: [{'k11': 'v11'}, {'k12': 'v12'}, {'k13': 'v13'}]
+    list2: [{'k21': 'v21'}, {'k22': 'v22'}, {'k23': 'v23'}]
+    list3: [{'k31': 'v31'}, {'k32': 'v32'}, {'k33': 'v33'}]
 
   tasks:
     - debug:
@@ -136,6 +139,14 @@
         msg: "dict_zip_rev: {{ fruits|
                                list_dict_zip_rev(vegetables) }}"
       tags: lm_dict_zip_rev
+
+    - debug:
+        msg: "list2dict: {{ list1|zip(list2)|list_list2dict }}"
+      tags: lm_list2dict
+    - debug:
+        msg: "list2dict: {{ list1|zip(list2)|list_list2dict|
+                                  zip(list3)|list_list2dict }}"
+      tags: lm_list2dict_3
 
     - debug:
         msg: "list_split_period: {{ fruits|list_split_period(2) }}"

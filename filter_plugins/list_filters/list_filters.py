@@ -87,6 +87,15 @@ def list_dict_zip(l,k):
 def list_dict_zip_rev(l,k):
     return dict((y,x) for x,y in  zip(l,k))
 
+def list_list2dict(l):
+    out = []
+    for i in l:
+        item = {}
+        for j in range(0, len(i)):
+            item.update(i[j])
+        out.append(item)
+    return out
+
 def list_split_period(l, p):
     split_list = []
     for i in range(p, len(l)+p, p):
@@ -139,6 +148,7 @@ class FilterModule(object):
             'list_zip': list_zip,
             'list_dict_zip': list_dict_zip,
             'list_dict_zip_rev': list_dict_zip_rev,
+            'list_list2dict': list_list2dict,
             'list_split_period': list_split_period,
             'list_select_list_bool': list_select_list_bool
         }
