@@ -34,13 +34,14 @@ def acme_enc_hex(data):
     missing_padding = 4 - len(data) % 4
     if missing_padding:
         data += b'='* missing_padding
-    return '0x'+binascii.hexlify(base64.b64decode(data,b'-_')).upper()
+    return '0x' + binascii.hexlify(base64.b64decode(data,b'-_')).decode().upper()
 
 def acme_pk_json2asn1(pk_json):
     ''' Convert ACME private key from JSON to ASN1 '''
     for k,v in pk_json.items():
         if k == 'kty': continue
         pk_json[k] = acme_enc_hex(v.encode())
+    pk_asn1 = ""
     pk_asn1 = '\n'.join(i for i in ("asn1=SEQUENCE:private_key",
                                     "[private_key]",
                                     "version=INTEGER:0",

@@ -22,7 +22,7 @@
         - name: "acme_pk: Display JSON"
           debug:
             msg: "{{ pk_json }}"
-        - name: "acme_pk: Conver JSON to ASN1"
+        - name: "acme_pk: Convert JSON to ASN1"
           set_fact:
             pk_asn1: "{{ pk_json|acme_pk_json2asn1 }}"
         - name: "acme_pk: Display ASN1"

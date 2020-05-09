@@ -10,12 +10,12 @@ def file_list_search(list, string):
     return file_search(file, string)
 
 def file_search(file, string):
-    f = open(file)
-    s = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
-    if s.find(string) != -1:
-        return True
-    else:
-        return False
+    with open(file, 'r') as f:
+        data = f.read().replace('\n', '')
+        if string in data:
+            return True
+        else:
+            return False
 
 class FilterModule(object):
     ''' Ansible filters for operating on files '''

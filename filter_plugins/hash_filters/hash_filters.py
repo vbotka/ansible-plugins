@@ -2,13 +2,13 @@
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
 def hash_to_tuple(h):
-    return h.items()[0]
+    return list(h.items())[0]
 
 def hash_key(h):
-    return h.keys()[0]
+    return list(h.keys())[0]
 
 def hash_value(h):
-    return h.values()[0]
+    return list(h.values())[0]
 
 def hash_to_tuples(h):
     return h.items()

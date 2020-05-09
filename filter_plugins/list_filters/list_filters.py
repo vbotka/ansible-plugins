@@ -119,6 +119,15 @@ def list_select_list_bool(b, l, negative=False):
                 l2.append(li)
     return l2
 
+def list_range(l):
+    return [i for i in range(*l)]
+
+def list_wrapper(l, func):
+    return func(*l)
+
+def list_wrapper_comp(l, func):
+    return [i for i in func(*l)]
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.
 
@@ -150,5 +159,8 @@ class FilterModule(object):
             'list_dict_zip_rev': list_dict_zip_rev,
             'list_list2dict': list_list2dict,
             'list_split_period': list_split_period,
-            'list_select_list_bool': list_select_list_bool
+            'list_select_list_bool': list_select_list_bool,
+            'list_range': list_range,
+            'list_wrapper': list_wrapper,
+            'list_wrapper_comp': list_wrapper_comp
         }

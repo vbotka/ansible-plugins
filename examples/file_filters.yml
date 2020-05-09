@@ -7,7 +7,8 @@
 
   vars:
     test_string: "test string"
-    test_file: "test_file1.txt"
+    test_file1: "test_file1.txt"
+    test_file2: "test_file2.txt"
     list1_files:
       - test_file1.txt
       - test_file2.txt
@@ -18,14 +19,19 @@
   tasks:
     - name: "No.1 String is in file"
       debug:
-        msg: "{{ test_string }} found in {{ test_file }}"
-      when: test_file|file_search(test_string)
+        msg: "{{ test_string }} found in {{ test_file1 }}"
+      when: test_file1|file_search(test_string)
       tags: t1
+
+    - name: "No.1 String is in file"
+      debug:
+        msg: "{{ test_file1|file_search(test_string) }}"
+      tags: t1a
 
     - name: "No.2 String is NOT in file"
       debug:
-        msg: "{{ test_string }} found in {{ test_file }}"
-      when: "'test_file2.txt'|file_search(test_string)"
+        msg: "{{ test_string }} found in {{ test_file2 }}"
+      when: test_file2|file_search(test_string)
       tags: t2
 
     - name: "No.3 String is in list of files"

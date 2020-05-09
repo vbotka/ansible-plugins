@@ -21,6 +21,10 @@
     list1: [{'k11': 'v11'}, {'k12': 'v12'}, {'k13': 'v13'}]
     list2: [{'k21': 'v21'}, {'k22': 'v22'}, {'k23': 'v23'}]
     list3: [{'k31': 'v31'}, {'k32': 'v32'}, {'k33': 'v33'}]
+    ranges1: [[2], [3]]
+    ranges2: [[2, 4], [11, 13], [997, 999]]
+    ranges3: [[2, 8, 2], [11, 22, 3], [997, 999, 1]]
+    lipsums: [[2, false, 20, 100], [4, false, 10, 50]]
 
   tasks:
     - debug:
@@ -166,5 +170,25 @@
         msg: "list_select_list_bool: {{ select_bool7|
                                         list_select_list_bool(fruits, negative=True) }}"
       tags: lm_select_list_bool_negative
+
+    - debug:
+        msg: "range: {{ ranges1|map('list_range')|list }}"
+      tags: lm_range
+    - debug:
+        msg: "range: {{ ranges2|map('list_range')|list }}"
+      tags: lm_range
+    - debug:
+        msg: "range: {{ ranges3|map('list_range')|list }}"
+      tags: lm_range
+
+    - debug:
+        msg: "{{ msg.split('\\n') }}"
+      vars:
+        msg: "wrapper: {{ lipsums|map('list_wrapper', lipsum)|list }}"
+      tags: lm_wrapper
+
+    - debug:
+        msg: "wrapper_comp: {{ ranges2|map('list_wrapper_comp', range)|list }}"
+      tags: lm_wrapper_comp
 
 ...

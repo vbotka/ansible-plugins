@@ -30,10 +30,10 @@ def dict_merge_lossless(x, y):
 
 def dict_add_dict(d1, d2, recursive=False):
     if recursive:
-        for k, v in d2.iteritems():
+        for k, v in d2.items():
             d1[k] = [d1[k],v]
     else:
-        for k, v in d2.iteritems():
+        for k, v in d2.items():
             d1[k] = v
     if isinstance(d1[k], (list,)):
         d1[k] = list_flatten(d1[k])
@@ -53,9 +53,10 @@ def dict_search_key(d, key):
     return key in d
 
 def dict_prefix_keys(d, prefix='prefix_'):
+    d1 = {}
     for key in d.keys():
-        d[prefix + key] = d.pop(key)
-    return d
+        d1[prefix + key] = d[key]
+    return d1
 
 def dict_flatten(d, separator='.'):
     ''' Credit: Flattening JSON objects in Python by Amir Ziai
