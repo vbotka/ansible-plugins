@@ -41,7 +41,6 @@ def acme_pk_json2asn1(pk_json):
     for k,v in pk_json.items():
         if k == 'kty': continue
         pk_json[k] = acme_enc_hex(v.encode())
-    pk_asn1 = ""
     pk_asn1 = '\n'.join(i for i in ("asn1=SEQUENCE:private_key",
                                     "[private_key]",
                                     "version=INTEGER:0",
