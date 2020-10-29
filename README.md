@@ -23,7 +23,7 @@ Various Ansbile plugins.
 
 ## Test plugins
 
-- **list_tests** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_tests.sh)
+- **list_tests** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_tests.yml)
 
 ## Inventory plugins
 
