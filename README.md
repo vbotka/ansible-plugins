@@ -21,6 +21,10 @@ Various Ansbile plugins.
 - **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
 
+## Test plugins
+
+- **list_tests** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_tests.sh)
+
 ## Inventory plugins
 
 - **ip_based_groups** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/inventory-ip_based_groups.sh)

@@ -1,0 +1,15 @@
+---
+# Test test_plugins/
+
+- name: list_tests
+  hosts: localhost
+  gather_facts: false
+  vars:
+    fruits: ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+  tasks:
+    - debug:
+        msg: "kiwi is in the list: {{ result }}"
+      vars:
+        result: "{{ fruits is contains('kiwi') }}"
+      tags: contains
+...
