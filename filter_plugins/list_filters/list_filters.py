@@ -1,8 +1,13 @@
 # All rights reserved (c) 2019-2020, Vladimir Botka <vbotka@gmail.com>
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+from ansible.errors import AnsibleError, AnsibleFilterError
 import re
 import random
+from collections import defaultdict
 from operator import itemgetter, attrgetter
 
 def list_append(l, x=''):
@@ -128,6 +133,17 @@ def list_wrapper(l, func):
 def list_wrapper_comp(l, func):
     return [i for i in func(*l)]
 
+def lists_mergeby(l1, l2, index):
+    '''Merge lists by attribute index. Example:
+    - debug: msg="{{ l1|lists_mergeby(l2, 'index')|list }}"
+    '''
+    d = defaultdict(dict)
+    for l in (l1, l2):
+        for elem in l:
+            d[elem[index]].update(elem)
+    return sorted(d.values(), key=itemgetter(index))
+
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.
 
@@ -162,5 +178,6 @@ class FilterModule(object):
             'list_select_list_bool': list_select_list_bool,
             'list_range': list_range,
             'list_wrapper': list_wrapper,
-            'list_wrapper_comp': list_wrapper_comp
+            'list_wrapper_comp': list_wrapper_comp,
+            'lists_mergeby': lists_mergeby
         }

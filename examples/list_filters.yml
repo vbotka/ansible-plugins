@@ -21,6 +21,26 @@
     list1: [{'k11': 'v11'}, {'k12': 'v12'}, {'k13': 'v13'}]
     list2: [{'k21': 'v21'}, {'k22': 'v22'}, {'k23': 'v23'}]
     list3: [{'k31': 'v31'}, {'k32': 'v32'}, {'k33': 'v33'}]
+    list4:
+      - name: myname01
+        param01: myparam01
+      - name: myname02
+        param01: myparam02
+    list5:
+      - name: myname01
+        param01: myparam03
+      - name: myname02
+        param02: myparam04
+      - name: myname03
+        param03: myparam03
+    list6:
+      - name: myname01
+        param01: myparam03
+      - name: myname02
+        param01: myparam02
+        param02: myparam04
+      - name: myname03
+        param03: myparam03
     ranges1: [[2], [3]]
     ranges2: [[2, 4], [11, 13], [997, 999]]
     ranges3: [[2, 8, 2], [11, 22, 3], [997, 999, 1]]
@@ -191,4 +211,17 @@
         msg: "wrapper_comp: {{ ranges2|map('list_wrapper_comp', range)|list }}"
       tags: lm_wrapper_comp
 
+    - debug:
+        msg: "mergeby: {{ list4|lists_mergeby(list5, 'name')|list }}"
+      tags: lm_mergeby
+
+# ASSERT - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    - name: test lists_meged
+      assert:
+        that:
+          - "(list4|lists_mergeby(list5, 'name')|list|difference(list6)|length) == 0"
+      tags: lm_assert_mergeby
+
+# EOF
 ...
