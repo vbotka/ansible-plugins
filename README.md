@@ -20,6 +20,7 @@ Various Ansbile plugins.
 - **list_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_filters.yml)
 - **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
+- **xml_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/xml_filters.yml)
 
 ## Test plugins
 

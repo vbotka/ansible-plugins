@@ -13,6 +13,7 @@ ansible-playbook file_filters.yml
 ansible-playbook hash_filters.yml
 ansible-playbook string_filters.yml
 ansible-playbook version_filters.yml
+ansible-playbook xml_filters.yml
 
 # Inventory plugins
 ANSIBLE_CONFIG=$PWD/ansible-inventory-ip_based_groups.cfg ansible-playbook inventory-ip_based_groups.yml

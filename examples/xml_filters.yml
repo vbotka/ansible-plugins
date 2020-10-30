@@ -1,0 +1,19 @@
+---
+# Test filter_plugins/xml_filters
+
+- name: xml_filters
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    xml_data: >-
+      <msg time='2020-09-16T00:39:25.613-04:00' org_id='oracle' comp_id='tnslsnr'
+      type='ERROR' level='16' host_id='localhost.localdomain'
+      host_addr='127.0.0.1' pid='6468'>
+      <txt>16-SEP-2020 00:39:25 * service_update * orclcdb * 0</txt>
+      </msg>
+  tasks:
+    - debug:
+        msg: "{{ xml_data|xml_to_json }}"
+      tags: xml_to_json
+...
