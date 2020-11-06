@@ -126,5 +126,5 @@ class FilterModule(object):
             'item2dict': item2dict,
             'dict_select_list': dict_select_list,
             'dict2hash': dict2hash,
-            'dict_add_hash': dict_add_hash
+            'dict_add_hash': dict_add_hash,
         }

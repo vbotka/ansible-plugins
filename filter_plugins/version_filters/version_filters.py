@@ -21,5 +21,5 @@ class FilterModule(object):
         return {
             'version_sort' : version_sort,
             'version_max' : version_max,
-            'version_min' : version_min
+            'version_min' : version_min,
             }

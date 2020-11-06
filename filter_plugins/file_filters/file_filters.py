@@ -23,5 +23,5 @@ class FilterModule(object):
     def filters(self):
         return {
             'file_search' : file_search,
-            'file_list_search' : file_list_search
+            'file_list_search' : file_list_search,
         }

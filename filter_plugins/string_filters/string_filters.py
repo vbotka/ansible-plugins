@@ -41,5 +41,5 @@ class FilterModule(object):
             'string_prefix' : string_prefix,
             'string_postfix' : string_postfix,
             'string_replace' : string_replace,
-            'string_split' : string_split
+            'string_split' : string_split,
         }

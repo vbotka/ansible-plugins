@@ -14,5 +14,5 @@ class FilterModule(object):
 
     def filters(self):
         return {
-            'datetime_epoch_strftime': datetime_epoch_strftime
+            'datetime_epoch_strftime': datetime_epoch_strftime,
         }

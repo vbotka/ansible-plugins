@@ -179,5 +179,5 @@ class FilterModule(object):
             'list_range': list_range,
             'list_wrapper': list_wrapper,
             'list_wrapper_comp': list_wrapper_comp,
-            'lists_mergeby': lists_mergeby
+            'lists_mergeby': lists_mergeby,
         }

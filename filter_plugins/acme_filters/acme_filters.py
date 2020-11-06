@@ -78,7 +78,7 @@ class FilterModule(object):
         return {
             'acme_pk_json2asn1': acme_pk_json2asn1,
             'acme_pk_asn12der': acme_pk_asn12der,
-            'acme_pk_der2pem': acme_pk_der2pem
+            'acme_pk_der2pem': acme_pk_der2pem,
         }
 
 # EOF

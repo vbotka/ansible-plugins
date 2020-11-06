@@ -53,5 +53,5 @@ class FilterModule(object):
             'bool_is': bool_is,
             'bool_is_not': bool_is_not,
             'bool_in': bool_in,
-            'bool_in_not': bool_in_not
+            'bool_in_not': bool_in_not,
         }

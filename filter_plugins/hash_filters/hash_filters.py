@@ -29,5 +29,5 @@ class FilterModule(object):
             'hash_value': hash_value,
             'hash_to_tuples': hash_to_tuples,
             'hash_keys': hash_keys,
-            'hash_values': hash_values
+            'hash_values': hash_values,
         }
