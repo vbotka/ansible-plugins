@@ -18,6 +18,7 @@
     vegetables: ['potato', 'tomato', 'carrot']
     select_bool7: [false, true, true, false, false, true, false]
     students: [['john', 'A', 15], ['jane', 'B', 12], ['dave', 'B', 10]]
+    dict1: {'k11': 'v11', 'k12': 'v12', 'k13': 'v13'}
     list1: [{'k11': 'v11'}, {'k12': 'v12'}, {'k13': 'v13'}]
     list2: [{'k21': 'v21'}, {'k22': 'v22'}, {'k23': 'v23'}]
     list3: [{'k31': 'v31'}, {'k32': 'v32'}, {'k33': 'v33'}]
@@ -33,6 +34,18 @@
         param02: myparam04
       - name: myname03
         param03: myparam03
+    list4b:
+      - name: myname02
+        param01: myparam02
+      - name: myname01
+        param01: myparam01
+    list5b:
+      - name: myname02
+        param02: myparam04
+      - name: myname03
+        param03: myparam03
+      - name: myname01
+        param01: myparam03
     list6:
       - name: myname01
         param01: myparam03
@@ -212,8 +225,34 @@
       tags: lm_wrapper_comp
 
     - debug:
-        msg: "mergeby: {{ list4|lists_mergeby(list5, 'name')|list }}"
+        msg: "{{ list4|lists_mergeby(list5, 'name')|list }}"
       tags: lm_mergeby
+
+    - debug:
+        msg: "{{ list4|lists_mergeby(list5, 'name')|list }}"
+      when: lm_enable_err|default(false)|bool
+      tags: lm_mergeby2
+
+    - debug:
+        msg: "{{ list4|lists_mergeby(list5, 'nameX')|list }}"
+      tags: lm_mergeby3
+
+    - debug:
+        msg: "{{ list4b|lists_mergeby(list5b, 'name')|list }}"
+      tags: lm_mergeby4
+
+    - debug:
+        msg: "{{ [{'n': 'n1', 'p1': 'A', 'p2': 'F'},
+                  {'n': 'n2', 'p2': 'B'}]|
+                 lists_mergeby([{'n': 'n1', 'p1': 'C'},
+                                {'n': 'n2', 'p2': 'D'},
+                                {'n': 'n3', 'p3': 'E'}], 'n')|
+                 list }}"
+      tags: lm_mergeby5
+
+    - debug:
+        msg: "{{ list4b|list_test(list5b, 'nameX')|list }}"
+      tags: lm_test
 
 # ASSERT - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

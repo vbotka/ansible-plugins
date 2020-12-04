@@ -4,11 +4,13 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-from ansible.errors import AnsibleError, AnsibleFilterError
 import re
 import random
 from collections import defaultdict
 from operator import itemgetter, attrgetter
+
+from ansible.errors import AnsibleError, AnsibleFilterError
+from ansible.module_utils.six import string_types
 
 def list_append(l, x=''):
     l.append(x)
@@ -134,14 +136,41 @@ def list_wrapper_comp(l, func):
     return [i for i in func(*l)]
 
 def lists_mergeby(l1, l2, index):
-    '''Merge lists by attribute index. Example:
-    - debug: msg="{{ l1|lists_mergeby(l2, 'index')|list }}"
-    '''
+    ''' merge lists by attribute index. Example:
+        - debug: msg="{{ l1|community.general.lists_mergeby(l2, 'index')|list }}" '''
+
+    if not isinstance(l1, list):
+        raise AnsibleFilterError('First argument for lists_mergeby must be list. %s is %s' %
+                                 (l1, type(l1)))
+
+    if not isinstance(l2, list):
+        raise AnsibleFilterError('Second argument for lists_mergeby must be list. %s is %s' %
+                                 (l2, type(l2)))
+
+    if not isinstance(index, string_types):
+        raise AnsibleFilterError('Third argument for lists_mergeby must be string. %s is %s' %
+                                 (index, type(index)))
+
     d = defaultdict(dict)
     for l in (l1, l2):
         for elem in l:
-            d[elem[index]].update(elem)
-    return sorted(d.values(), key=itemgetter(index))
+            if index in elem.keys():
+                d[elem[index]].update(elem)
+    if d.values():
+        return sorted(d.values(), key=itemgetter(index))
+    else:
+        return d.values()
+
+def list_test(l1, l2, index):
+    d = defaultdict(dict)
+    for l in (l1, l2):
+        for elem in l:
+            if index in elem.keys():
+                d[elem[index]].update(elem)
+    if d.values():
+        return sorted(d.values(), key=itemgetter(index))
+    else:
+        return d.values()
 
 
 class FilterModule(object):
@@ -180,4 +209,5 @@ class FilterModule(object):
             'list_wrapper': list_wrapper,
             'list_wrapper_comp': list_wrapper_comp,
             'lists_mergeby': lists_mergeby,
+            'list_test': list_test,
         }
