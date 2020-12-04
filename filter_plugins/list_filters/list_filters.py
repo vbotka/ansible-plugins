@@ -4,13 +4,13 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import re
-import random
-from collections import defaultdict
-from operator import itemgetter, attrgetter
-
 from ansible.errors import AnsibleError, AnsibleFilterError
 from ansible.module_utils.six import string_types
+from ansible.module_utils.common._collections_compat import Mapping, Sequence
+from collections import defaultdict
+from operator import itemgetter, attrgetter
+import re
+import random
 
 def list_append(l, x=''):
     l.append(x)
@@ -139,27 +139,26 @@ def lists_mergeby(l1, l2, index):
     ''' merge lists by attribute index. Example:
         - debug: msg="{{ l1|community.general.lists_mergeby(l2, 'index')|list }}" '''
 
-    if not isinstance(l1, list):
-        raise AnsibleFilterError('First argument for lists_mergeby must be list. %s is %s' %
+    if not isinstance(l1, Sequence):
+        raise AnsibleFilterError('First argument for community.general.lists_mergeby must be list. %s is %s' %
                                  (l1, type(l1)))
 
-    if not isinstance(l2, list):
-        raise AnsibleFilterError('Second argument for lists_mergeby must be list. %s is %s' %
+    if not isinstance(l2, Sequence):
+        raise AnsibleFilterError('Second argument for community.general.lists_mergeby must be list. %s is %s' %
                                  (l2, type(l2)))
 
     if not isinstance(index, string_types):
-        raise AnsibleFilterError('Third argument for lists_mergeby must be string. %s is %s' %
+        raise AnsibleFilterError('Third argument for community.general.lists_mergeby must be string. %s is %s' %
                                  (index, type(index)))
 
     d = defaultdict(dict)
     for l in (l1, l2):
         for elem in l:
+            if not isinstance(elem, Mapping):
+                raise AnsibleFilterError('Elements of list arguments for lists_mergeby must be dictionaries. Found {0!r}.'.format(elem))
             if index in elem.keys():
                 d[elem[index]].update(elem)
-    if d.values():
-        return sorted(d.values(), key=itemgetter(index))
-    else:
-        return d.values()
+    return sorted(d.values(), key=itemgetter(index))
 
 def list_test(l1, l2, index):
     d = defaultdict(dict)
@@ -167,11 +166,7 @@ def list_test(l1, l2, index):
         for elem in l:
             if index in elem.keys():
                 d[elem[index]].update(elem)
-    if d.values():
-        return sorted(d.values(), key=itemgetter(index))
-    else:
-        return d.values()
-
+    return sorted(d.values(), key=itemgetter(index))
 
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.

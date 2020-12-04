@@ -39,6 +39,10 @@
         param01: myparam02
       - name: myname01
         param01: myparam01
+    list4c:
+      - name
+      - name: myname01
+        param01: myparam01
     list5b:
       - name: myname02
         param02: myparam04
@@ -229,7 +233,7 @@
       tags: lm_mergeby
 
     - debug:
-        msg: "{{ list4|lists_mergeby(list5, 'name')|list }}"
+        msg: "{{ list4c|lists_mergeby(list5, 'name')|list }}"
       when: lm_enable_err|default(false)|bool
       tags: lm_mergeby2
 
