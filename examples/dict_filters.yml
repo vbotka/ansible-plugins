@@ -25,6 +25,7 @@
       core_api: 7201
       stock_api: 7204
       import_export: 7207
+    ports_attrs1: [webui, core_api]
     dict4: {
       "a":{
         "r": 1,
@@ -56,6 +57,28 @@
       - ["key1", "value1"]
       - ["key2", "value2"]
       - ["key3", "value3"]
+    list3:
+      - ip: 10.1.0.19
+        mask: 255.255.255.0
+        mac: 88:88:88:88:88:80
+      - ip: 10.1.0.17
+        mask: 255.255.255.0
+        mac: 88:88:88:88:88:81
+      - ip: 10.1.0.18
+        mask: 255.255.255.0
+        mac: 88:88:88:88:88:82
+    list3_attrs1: [ip, mask]
+    list4:
+      - country: England
+        capital: London
+        population: 9
+      - country: USA
+        capital: Washington
+        population: 8
+      - country: Australia
+        capital: Canberra
+        population: 0.4
+    list4_attrs1: [capital, population]
 
   tasks:
 
@@ -164,3 +187,21 @@
       vars:
         dict2hash: "{{ dict4|dict2hash }}"
       tags: dict2hash
+
+    - debug:
+        var: result
+      vars:
+        result: "{{ ports|dict_attrs(ports_attrs1) }}"
+      tags: dict_attrs1
+
+    - debug:
+        var: result
+      vars:
+        result: "{{ list3|map('dict_attrs', list3_attrs1)|list }}"
+      tags: dict_attrs2
+
+    - debug:
+        var: result
+      vars:
+        result: "{{ list4|items2dict(key_name='capital', value_name='population') }}"
+      tags: dict_items2dict

@@ -1,6 +1,13 @@
 # All rights reserved (c) 2019-2020, Vladimir Botka <vbotka@gmail.com>
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+from ansible.errors import AnsibleError, AnsibleFilterError
+from ansible.module_utils.six import string_types
+from ansible.module_utils.common._collections_compat import Mapping, Sequence
+
 import sys
 import json
 
@@ -104,6 +111,24 @@ def dict_add_hash(d, k='hash'):
     d2[k] = hash(json.dumps(d, sort_keys=True))
     return d2
 
+def dict_attrs(d, attrs):
+    ''' select attributes from dictionary. Example:
+        - debug: msg="{{ d|dict_attrs(attrs) }}" '''
+
+    if not isinstance(d, Mapping):
+        raise AnsibleFilterError('First argument for dict_attrs must be dictionary. %s is %s' %
+                                 (d, type(d)))
+    if not isinstance(attrs, Sequence):
+        raise AnsibleFilterError('Second argument for dict_attrs must be list. %s is %s' %
+                                 (attrs, type(attrs)))
+
+    d_attrs = {}
+    for attr in attrs:
+        if attr in d.keys():
+            d_attrs[attr] = d[attr]
+    return d_attrs
+
+
 class FilterModule(object):
     ''' Ansible filters. Interface to Python dictionary methods.
 
@@ -127,4 +152,5 @@ class FilterModule(object):
             'dict_select_list': dict_select_list,
             'dict2hash': dict2hash,
             'dict_add_hash': dict_add_hash,
+            'dict_attrs': dict_attrs,
         }
