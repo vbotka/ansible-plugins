@@ -349,6 +349,16 @@ def any2items(x, key='key', override=False):
         return l
 
 
+def items2dict2(mylist, key_name='key', value_name='value', default_value=None):
+    ''' takes a list of dicts with each having a 'key' and 'value' keys, and transforms the list into a dictionary,                                                                                   effectively as the reverse of dict2items. If 'value_name' does not exist use 'default_value'.  '''
+
+    if not isinstance(mylist, Sequence):
+        raise AnsibleFilterError("First argument for community.general.items2dict2 requires a list. %s is %s" %
+                                 (mylist, type(mylist)))
+
+    return dict((item[key_name], item.setdefault(value_name, default_value)) for item in mylist)
+
+
 def list_test(l1, l2, index):
     d = defaultdict(dict)
     for l in (l1, l2):
@@ -356,6 +366,7 @@ def list_test(l1, l2, index):
             if index in elem.keys():
                 d[elem[index]].update(elem)
     return sorted(d.values(), key=itemgetter(index))
+
 
 class FilterModule(object):
     ''' Ansible filters. Interface to Python list methods.
@@ -395,4 +406,5 @@ class FilterModule(object):
             'lists_mergeby': lists_mergeby,
             'list_test': list_test,
             'any2items': any2items,
+            'items2dict2': items2dict2,
         }

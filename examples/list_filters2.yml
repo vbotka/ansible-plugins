@@ -1,12 +1,11 @@
 ---
 # Test filter_plugins/list_filters
 
-- name: list_filters
+- name: Test any2items
   hosts: localhost
   gather_facts: false
 
   tasks:
-
  
     - name: No changes to a list
       debug:

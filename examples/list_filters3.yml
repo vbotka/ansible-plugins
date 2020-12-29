@@ -1,0 +1,47 @@
+---
+# Test filter_plugins/list_filters
+
+- name: Test items2dict2
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+    - name: Example 1
+      debug:
+        msg: "{{ fruits|items2dict2 }}"
+      vars:
+        fruits:
+          - key: apple
+            value: green
+          - key: banana
+          - key: orange
+
+#      gives:
+#
+#      msg:
+#        apple: green
+#        banana: null
+#        orange: null
+
+    - name: Example 2
+      debug:
+        msg: "{{ fruits|items2dict2(key_name='k',
+                                    value_name='v',
+                                    default_value='undefined') }}"
+      vars:
+        fruits:
+          - k: apple
+            v: green
+          - k: banana
+          - k: orange
+
+#      gives:
+#
+#      msg:
+#        apple: green
+#        banana: undefined
+#        orange: undefined
+
+# EOF
+...
