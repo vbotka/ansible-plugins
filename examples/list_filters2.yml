@@ -1,0 +1,143 @@
+---
+# Test filter_plugins/list_filters
+
+- name: list_filters
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+ 
+    - name: No changes to a list
+      debug:
+        msg: "{{ fruits|any2items }}"
+      vars:
+        fruits: [apple, banana, orange]
+
+#      gives:
+#
+#      msg:
+#        - apple
+#        - banana
+#        - orang
+
+    - name: Convert string to first item in a list
+      debug:
+        msg: "{{ fruits|any2items }}"
+      vars:
+        fruits: 'apple'
+
+#      gives:
+#
+#      msg:
+#        - apple
+
+    - name: Convert None to first item in a list
+      debug:
+        msg: "{{ fruits|any2items }}"
+      vars:
+        fruits: None
+
+#      gives:
+#
+#      msg:
+#        - None
+
+    - name: Convert dictionary where all values are dictionaries to a list
+      debug:
+        msg: "{{ fruits|any2items }}"
+      vars:
+        fruits:
+          apple:
+            color: green
+            size: big
+          banana:
+            color: yellow
+            size: small
+
+#      gives:
+#
+#      msg:
+#        - color: green
+#          key: apple
+#          size: big
+#        - color: yellow
+#          key: banana
+#          size: small
+
+    - name: Same as the above but change key name
+      debug:
+        msg: "{{ fruits|any2items(key='name') }}"
+      vars:
+        fruits:
+          apple:
+            color: green
+            size: big
+          banana:
+            color: yellow
+            size: small
+
+#      gives:
+#
+#      msg:
+#        - color: green
+#          name: apple
+#          size: big
+#        - color: yellow
+#          name: banana
+#          size: small
+
+    - name: Convert dictionary where NOT all values are dictionaries
+            to a first item in a list
+      debug:
+        msg: "{{ fruits|any2items }}"
+      vars:
+        fruits:
+          apple:
+            color: green
+            size: big
+          banana:
+            color: yellow
+            size: small
+          orange: ripe
+
+#      gives:
+#
+#      msg:
+#        - apple:
+#            color: green
+#            size: big
+#          banana:
+#            color: yellow
+#            size: small
+#          orange: ripe
+
+    - name: Convert dictionary where NOT all values are dictionaries
+            to a first item in a list
+      debug:
+        msg: "{{ fruits|any2items }}"
+      vars:
+        fruits:
+          apple: green
+          banana: yellow
+          orange: ripe
+
+#      gives:
+#
+#      msg:
+#        - apple: green
+#          banana: yellow
+#          orange: ripe
+
+    - name:
+      debug:
+        var: item
+      loop: "{{ [{'a': 1},{'b': 2}]|any2items }}"
+  
+    - name:
+      debug:
+        var: item
+      loop: "{{ {'c': 3}|any2items }}"
+
+# EOF
+...

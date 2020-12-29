@@ -18,7 +18,21 @@
     vegetables: ['potato', 'tomato', 'carrot']
     select_bool7: [false, true, true, false, false, true, false]
     students: [['john', 'A', 15], ['jane', 'B', 12], ['dave', 'B', 10]]
-    dict1: {'k11': 'v11', 'k12': 'v12', 'k13': 'v13'}
+    dict1: {'k1': 'v1', 'k2': 'v2', 'k3': 'v3'}
+    dict2: {'k1': {'k11': 'v11'}, 'k2': {'k21': 'v21'}, 'k3': {'k31': 'v31'}}
+    dict5: {'k1': {'k11': 'v11'}, 'k2': {'k21': 'v21'}, 'k3': 'v31'}
+    dict3: {'k1': ['k11', 'v11'], 'k2': ['k21': 'v21'], 'k3': ['k31': 'v31']}
+    dict4:
+      - {'k1': 'v1', 'k2': 'v2', 'k3': 'v3'}
+      - {'l1': 'v1', 'l2': 'v2', 'l3': 'v3'}
+      - {'m1': 'v1', 'm2': 'v2', 'm3': 'v3'}
+    packages:
+      app1:
+        name: Application1
+        packages: [pkg1, pkg2, pkg3]
+      app2:
+        name: Application2
+        packages: [pkg4]
     list1: [{'k11': 'v11'}, {'k12': 'v12'}, {'k13': 'v13'}]
     list2: [{'k21': 'v21'}, {'k22': 'v22'}, {'k23': 'v23'}]
     list3: [{'k31': 'v31'}, {'k32': 'v32'}, {'k33': 'v33'}]
@@ -253,6 +267,75 @@
                                 {'n': 'n3', 'p3': 'E'}], 'n')|
                  list }}"
       tags: lm_mergeby5
+
+    - debug:
+        var: item
+      loop: "{{ fruits|any2items }}"
+      tags: lm_any2items1
+
+    - debug:
+        var: item
+      loop: "{{ dict2|any2items }}"
+      tags:
+        - lm_any2items2
+        - lm_any2items2a
+    - debug:
+        var: item
+      loop: "{{ dict5|any2items }}"
+      tags:
+        - lm_any2items2
+        - lm_any2items2b
+    - debug:
+        msg: "{{ dict2|any2items }}"
+      tags:
+        - lm_any2items2
+        - lm_any2items2c
+
+    - debug:
+        var: item
+      loop: "{{ dict2|any2items(key='dict') }}"
+      tags: lm_any2items3
+    - debug:
+        var: item
+      loop: "{{ dict2|any2items(key='k11') }}"
+      ignore_errors: true
+      tags: lm_any2items3
+    - debug:
+        var: item
+      loop: "{{ dict2|any2items(key='k11', override=True) }}"
+      tags: lm_any2items3
+
+    - debug:
+        var: item
+      loop: "{{ 'x'|any2items }}"
+      tags: lm_any2items5
+
+    - debug:
+        var: item
+      loop: "{{ None|any2items }}"
+      tags: lm_any2items6
+
+    - debug:
+        var: item
+      loop: "{{ dict1|any2items }}"
+      tags: lm_any2items7
+
+    - debug:
+        var: item
+      loop: "{{ dict4|any2items }}"
+      tags: lm_any2items8
+
+    - debug:
+        var: item
+      loop: "{{ {'k1': {'k11': 'v11'}, 'k2': {'k21': 'v21'}}|any2items }}"
+      tags: lm_any2items9
+
+    - debug:
+        msg: "Install {{ item }}"
+      with_subelements:
+        - "{{ packages.values()|list }}"
+        - packages
+      tags: lm_any2items10
 
     - debug:
         msg: "{{ list4b|list_test(list5b, 'nameX')|list }}"
