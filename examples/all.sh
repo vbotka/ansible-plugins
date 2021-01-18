@@ -11,6 +11,8 @@ ansible-playbook datetime_filters.yml
 ansible-playbook dict_filters.yml
 ansible-playbook file_filters.yml
 ansible-playbook hash_filters.yml
+ansible-playbook list_filters.yml
+ansible-playbook netaddr_filters.yml -e test_netaddr=true
 ansible-playbook string_filters.yml
 ansible-playbook version_filters.yml
 ansible-playbook xml_filters.yml

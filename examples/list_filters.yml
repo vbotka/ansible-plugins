@@ -295,11 +295,14 @@
         var: item
       loop: "{{ dict2|any2items(key='dict') }}"
       tags: lm_any2items3
-    - debug:
+
+    - name: "lm_any2items3: Key k11 present in the dictionary"
+      debug:
         var: item
       loop: "{{ dict2|any2items(key='k11') }}"
       ignore_errors: true
       tags: lm_any2items3
+
     - debug:
         var: item
       loop: "{{ dict2|any2items(key='k11', override=True) }}"

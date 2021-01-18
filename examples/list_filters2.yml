@@ -6,7 +6,7 @@
   gather_facts: false
 
   tasks:
- 
+
     - name: No changes to a list
       debug:
         msg: "{{ fruits|any2items }}"
@@ -132,7 +132,7 @@
       debug:
         var: item
       loop: "{{ [{'a': 1},{'b': 2}]|any2items }}"
-  
+
     - name:
       debug:
         var: item

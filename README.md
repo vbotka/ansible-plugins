@@ -18,8 +18,9 @@ Various Ansbile plugins.
 - **file_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/file_filters.yml)
 - **hash_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_filters.yml)
 - **list_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_filters.yml)
-- **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
+- **netaddr_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/netaddr_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
+- **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **xml_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/xml_filters.yml)
 
 ## Test plugins
@@ -49,6 +50,7 @@ Various Ansbile plugins.
 - [list - More on Lists](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)
 - [list - Sorting HOW TO](https://docs.python.org/3/howto/sorting.html#sortinghowto)
 - [list - Ways to sort list of dictionaries by values in Python – Using lambda function](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/)
+- [netaddr - A network address manipulation library for Python](https://pypi.org/project/netaddr/)
 - [sort - How to sort complex version numbers in Ansible](https://stackoverflow.com/questions/56063612/how-to-sort-complex-version-numbers-in-ansible/)
 - [string - String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
 

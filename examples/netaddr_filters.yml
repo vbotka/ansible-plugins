@@ -1,0 +1,29 @@
+---
+# Test filter_plugins/netaddr_filters
+
+- name: netaddr_filters
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+
+  tasks:
+
+    - name: netaddr_iter_iprange
+      debug:
+        msg:
+          - "{{ '10.1.0.1'|netaddr_iter_iprange('10.1.0.3') }}"
+          - "{{ '10.1.0.1'|netaddr_iter_iprange('10.1.0.3')|
+                 difference(['10.1.0.1', '10.1.0.2', '10.1.0.3']) }}"
+      when: debug_netaddr|default(false)|bool
+      tags: iter_iprange
+    - name: netaddr_iter_iprange
+      assert:
+        that: "{{ '10.1.0.1'|netaddr_iter_iprange('10.1.0.3')|
+                   difference(['10.1.0.1', '10.1.0.2', '10.1.0.3'])|
+                   length == 0 }}"
+      when: test_netaddr|default(false)|bool
+      tags: iter_iprange
+
+# EOF
+...
