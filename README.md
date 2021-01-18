@@ -51,6 +51,7 @@ Various Ansbile plugins.
 - [list - Sorting HOW TO](https://docs.python.org/3/howto/sorting.html#sortinghowto)
 - [list - Ways to sort list of dictionaries by values in Python – Using lambda function](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/)
 - [netaddr - A network address manipulation library for Python](https://pypi.org/project/netaddr/)
+- [netaddr - Python Network Programming](https://0xbharath.github.io/python-network-programming/index.html)
 - [sort - How to sort complex version numbers in Ansible](https://stackoverflow.com/questions/56063612/how-to-sort-complex-version-numbers-in-ansible/)
 - [string - String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
 
