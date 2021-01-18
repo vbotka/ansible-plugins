@@ -6,7 +6,7 @@ Various Ansbile plugins.
 ## Installation
 
 - Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible) to install selected plugins
-- See [examples in role vars](https://github.com/vbotka/ansible-ansible/blob/master/vars/main.yml)
+- See [examples in role vars](https://github.com/vbotka/ansible-ansible/blob/master/vars/main.yml.sample)
 - See [examples in docs](https://ansible-ansible.readthedocs.io/en/latest/guide.html#examples)
 
 
