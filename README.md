@@ -5,8 +5,9 @@ Various Ansbile plugins.
 
 ## Installation
 
-- Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible) to install selected plugins.
-- See [example](https://github.com/vbotka/ansible-ansible/blob/master/vars/main.yml).
+- Use Ansible Galaxy Role [ansible](https://galaxy.ansible.com/vbotka/ansible) to install selected plugins
+- See [examples in role vars](https://github.com/vbotka/ansible-ansible/blob/master/vars/main.yml)
+- See [examples in docs](https://ansible-ansible.readthedocs.io/en/latest/guide.html#examples)
 
 
 ## Filter plugins
@@ -23,13 +24,16 @@ Various Ansbile plugins.
 - **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
 - **xml_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/xml_filters.yml)
 
+
 ## Test plugins
 
 - **list_tests** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_tests.yml)
 
+
 ## Inventory plugins
 
 - **ip_based_groups** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/inventory-ip_based_groups.sh)
+
 
 ## References
 
