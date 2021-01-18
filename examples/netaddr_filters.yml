@@ -9,7 +9,47 @@
 
   tasks:
 
-    - name: netaddr_iter_iprange
+    - name: netaddr_item 1 debug
+      debug:
+        msg:
+          - "{{ '192.0.2.16/29'|netaddr_item(-1) }}"
+          - "{{ '192.0.2.16/29'|netaddr_item(-1) == '192.0.2.23' }}"
+      when: debug_netaddr|default(false)|bool
+      tags: item_1
+    - name: netaddr_item 1 assert
+      assert:
+        that: "{{ '192.0.2.16/29'|netaddr_item(-1) == '192.0.2.23' }}"
+      when: test_netaddr|default(false)|bool
+      tags: item_1
+
+    - name: netaddr_item 2 debug
+      debug:
+        msg:
+          - "{{ ['192.0.2.16/29', '192.0.3.16/29', '192.0.4.16/29']|
+                map('netaddr_item', -1)|list }}"
+          - "{{ ['192.0.2.16/29', '192.0.3.16/29', '192.0.4.16/29']|
+                map('netaddr_item', -1)|
+                difference(['192.0.2.23', '192.0.3.23', '192.0.4.23']) }}"
+      when: debug_netaddr|default(false)|bool
+      tags: item_2
+    - name: netaddr_item 2 assert
+      assert:
+        that: "{{ ['192.0.2.16/29', '192.0.3.16/29', '192.0.4.16/29']|
+                  map('netaddr_item', -1)|
+                  difference(['192.0.2.23', '192.0.3.23', '192.0.4.23'])|
+                  length == 0 }}"
+      when: test_netaddr|default(false)|bool
+      tags: item_2
+
+    - name: netaddr_list debug
+      debug:
+        msg:
+          - "{{ '192.0.2.16/29'|netaddr_list }}"
+      when: debug_netaddr|default(false)|bool
+      tags: list
+      # TODO: netaddr_list assert
+
+    - name: netaddr_iter_iprange debug
       debug:
         msg:
           - "{{ '10.1.0.1'|netaddr_iter_iprange('10.1.0.3') }}"
@@ -17,7 +57,7 @@
                  difference(['10.1.0.1', '10.1.0.2', '10.1.0.3']) }}"
       when: debug_netaddr|default(false)|bool
       tags: iter_iprange
-    - name: netaddr_iter_iprange
+    - name: netaddr_iter_iprange assert
       assert:
         that: "{{ '10.1.0.1'|netaddr_iter_iprange('10.1.0.3')|
                    difference(['10.1.0.1', '10.1.0.2', '10.1.0.3'])|
