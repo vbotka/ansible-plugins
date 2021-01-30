@@ -1,0 +1,10 @@
+---
+
+- name: Test modules
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+    - include_tasks: test_modules_tasks/json_modify.yml
+      tags: json_modify

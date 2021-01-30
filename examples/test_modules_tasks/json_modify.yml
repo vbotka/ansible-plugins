@@ -1,0 +1,87 @@
+---
+
+- name: "json_modify: Set myvar"
+  set_fact:
+    myvar:
+      sub1: date1
+      sub2:
+        list1:
+          - k1: v1
+            k2: v2
+            k3:
+              - item1
+              - item2
+              - item3
+  tags: [extend, append, update]
+
+- name: "json_modify: extend"
+  json_modify:
+    data: "{{ myvar|to_json }}"
+    pointer: "/sub2/list1/0/k3"
+    action: extend
+    extend:
+      - ABC
+      - DEF
+  register: result
+  tags: extend
+
+#  result.result:
+#    sub1: date1
+#    sub2:
+#      list1:
+#      - k1: v1
+#        k2: v2
+#        k3:
+#        - item1
+#        - item2
+#        - item3
+#        - ABC
+#        - DEF
+
+- name: "json_modify: append"
+  json_modify:
+    data: "{{ myvar|to_json }}"
+    pointer: "/sub2/list1/0/k3"
+    action: append
+    append: ABC
+  register: result
+  tags: append
+
+#  result.result:
+#    sub1: date1
+#    sub2:
+#      list1:
+#      - k1: v1
+#        k2: v2
+#        k3:
+#        - item1
+#        - item2
+#        - item3
+#        - ABC
+
+- name: "json_modify: update"
+  json_modify:
+    data: "{{ myvar|to_json }}"
+    pointer: "/sub2/list1/0"
+    action: update
+    update: "k2=ABC"
+  register: result
+  tags: update
+
+#  result.result:
+#    sub1: date1
+#    sub2:
+#      list1:
+#      - k1: v1
+#        k2: ABC
+#        k3:
+#        - item1
+#        - item2
+#        - item3
+
+- debug:
+    var: result.result
+  tags: [extend, append, update]
+
+# EOF
+...
