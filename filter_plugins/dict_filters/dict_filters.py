@@ -27,13 +27,25 @@ def dict_merge(x, y):
     d.update(y)
     return d
 
-def dict_merge_lossless(x, y):
+def combine_lossless(x, y, flatten=False, unique=False):
     d = x.copy()
     d.update(y)
     for key, value in d.items():
-       if key in x and key in y:
-               d[key] = [value , x[key]]
+        if key in x and key in y:
+            if flatten and isinstance(value, list) and isinstance(x[key], list):
+                if unique:
+                    d[key] = list(set(value + x[key]))
+                else:
+                    d[key] = value + x[key]
+            else:
+                if unique:
+                    d[key] = list(set([value, x[key]]))
+                else:
+                    d[key] = [value, x[key]]
     return d
+
+def dict_merge_lossless(x, y, flatten=False, unique=False):
+    combine_lossless(x, y, flatten, unique)
 
 def dict_add_dict(d1, d2, recursive=False):
     if recursive:
@@ -142,6 +154,7 @@ class FilterModule(object):
             'dict_keys': dict_keys,
             'dict_merge': dict_merge,
             'dict_merge_lossless': dict_merge_lossless,
+            'combine_lossless': combine_lossless,
             'dict_sorted': dict_sorted,
             'dict_search_key': dict_search_key,
             'dict_prefix_keys': dict_prefix_keys,
