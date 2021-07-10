@@ -101,4 +101,6 @@
     - debug:
         msg: "in_not('x', l1): {{ 'x'|bool_in_not(l1) }}"
       tags: bool_in_not
+
+# EOF
 ...

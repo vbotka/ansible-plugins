@@ -1,0 +1,94 @@
+---
+# Test filter_plugins/pandas_filters
+
+- name: pandas_filters
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    d1:
+      key1: val1
+      key2: val2
+      key3:
+        subkey1: subval1
+        subkey2: subval2
+        subkey3:
+          sub2key1: sub2val1
+          sub2key2: sub2val2
+
+  tasks:
+
+    - block:
+        - name: "No.1 pandas_json_normalize: Create lists."
+          debug:
+            var: _list
+          vars:
+            _list: "{{ d1|pandas_json_normalize }}"
+        - assert:
+            that: _list == _result
+          vars:
+            _list: "{{ d1|pandas_json_normalize }}"
+            _result:
+              - - key1
+                - key2
+                - key3.subkey1
+                - key3.subkey2
+                - key3.subkey3.sub2key1
+                - key3.subkey3.sub2key2
+              - - val1
+                - val2
+                - subval1
+                - subval2
+                - sub2val1
+                - sub2val2
+      tags: json_normalize_list
+
+    - block:
+        - name: "No.2 pandas_json_normalize:  Create dictionary."
+          debug:
+            var: _dict
+          vars:
+            _list: "{{ d1|pandas_json_normalize }}"
+            _dict: "{{ dict(_list.0|zip(_list.1)) }}"
+        - assert:
+            that: _dict == _result
+          vars:
+            _list: "{{ d1|pandas_json_normalize }}"
+            _dict: "{{ dict(_list.0|zip(_list.1)) }}"
+            _result:
+              key1: val1
+              key2: val2
+              key3.subkey1: subval1
+              key3.subkey2: subval2
+              key3.subkey3.sub2key1: sub2val1
+              key3.subkey3.sub2key2: sub2val2
+      tags: json_normalize_dict
+
+    - block:
+        - name: "No.3 pandas_json_normalize: Create dictionary. Simple keys."
+          debug:
+            var: _dict
+          vars:
+            _list: "{{ d1|pandas_json_normalize }}"
+            _regex: '^(.*)\.(.*)$'
+            _replace: '\2'
+            _keys: "{{ _list.0|map('regex_replace', _regex, _replace)|list }}"
+            _dict: "{{ dict(_keys|zip(_list.1)) }}"
+        - assert:
+            that: _dict == _result
+          vars:
+            _list: "{{ d1|pandas_json_normalize }}"
+            _regex: '^(.*)\.(.*)$'
+            _replace: '\2'
+            _keys: "{{ _list.0|map('regex_replace', _regex, _replace)|list }}"
+            _dict: "{{ dict(_keys|zip(_list.1)) }}"
+            _result:
+              key1: val1
+              key2: val2
+              sub2key1: sub2val1
+              sub2key2: sub2val2
+              subkey1: subval1
+              subkey2: subval2
+      tags: json_normalize_dict_baseattr
+
+# EOF

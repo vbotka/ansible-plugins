@@ -1,7 +1,8 @@
 #!/bin/sh
 
-#export ANSIBLE_STDOUT_CALLBACK=default
-export ANSIBLE_STDOUT_CALLBACK=actionable
+export ANSIBLE_STDOUT_CALLBACK=default
+export ANSIBLE_DISPLAY_SKIPPED_HOSTS=no
+export ANSIBLE_DISPLAY_OK_HOSTS=yes
 #export ANSIBLE_STDOUT_CALLBACK=stderr
 
 # Filter plugins
@@ -14,6 +15,7 @@ ansible-playbook hash_filters.yml
 ansible-playbook list_filters.yml
 ansible-playbook netaddr_filters.yml -e test_netaddr=true
 ansible-playbook string_filters.yml
+ansible-playbook pandas_filters.yml
 ansible-playbook version_filters.yml
 ansible-playbook xml_filters.yml
 
