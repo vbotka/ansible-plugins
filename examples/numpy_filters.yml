@@ -1,0 +1,51 @@
+---
+# Test filter_plugins/numpy_filters
+
+- name: numpy_filters
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+
+    arr1:
+      - [1, 2, 3]
+      - [4, 5, 6]
+      - [7, 8, 9]
+
+    arr2:
+      - [1, 4, 7]
+      - [2, 5, 8]
+      - [3, 6, 9]
+
+  tasks:
+
+    - name: numpy_transpose
+      block:
+        - name: numpy_transpose debug
+          debug:
+            msg: "{{ arr1|numpy_transpose()|from_yaml|to_yaml }}"
+          when: debug_numpy|default(false)|bool
+        - name: numpy_transpose assert
+          assert:
+            that: "{{ arr1|numpy_transpose()|from_yaml == arr2 }}"
+          when: test_numpy|default(false)|bool
+      tags: numpy_transpose
+
+  # shell> ansible-playbook numpy_filters.yml -e debug_numpy=true \
+  #                                           -e test_numpy=true
+  #
+  # PLAY [nnumpy_filters] *******************************************
+  #
+  # TASK [numpy_transpose debug] ************************************
+  # ok: [localhost] =>
+  #   msg: |-
+  #     - [1, 4, 7]
+  #     - [2, 5, 8]
+  #     - [3, 6, 9]
+  #
+  # TASK [numpy_transpose assert] ***********************************
+  # ok: [localhost] => changed=false
+  #   msg: All assertions passed
+
+# EOF
+...
