@@ -232,15 +232,15 @@
         msg: "range: {{ ranges3|map('list_range')|list }}"
       tags: lm_range
 
-    - debug:
-        msg: "{{ msg.split('\\n') }}"
-      vars:
-        msg: "wrapper: {{ lipsums|map('list_wrapper', lipsum)|list }}"
-      tags: lm_wrapper
+#     - debug:
+#         msg: "{{ msg.split('\\n') }}"
+#       vars:
+#         msg: "wrapper: {{ lipsums|map('list_wrapper', lipsum)|list }}"
+#       tags: lm_wrapper
 
-    - debug:
-        msg: "wrapper_comp: {{ ranges2|map('list_wrapper_comp', range)|list }}"
-      tags: lm_wrapper_comp
+#     - debug:
+#         msg: "wrapper_comp: {{ ranges2|map('list_wrapper_comp', range)|list }}"
+#       tags: lm_wrapper_comp
 
     - debug:
         msg: "{{ list4|lists_mergeby(list5, 'name')|list }}"

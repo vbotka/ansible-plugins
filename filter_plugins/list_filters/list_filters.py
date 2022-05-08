@@ -1,32 +1,37 @@
-# All rights reserved (c) 2019-2021, Vladimir Botka <vbotka@gmail.com>
+# All rights reserved (c) 2019-2022, Vladimir Botka <vbotka@gmail.com>
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-from ansible.errors import AnsibleError, AnsibleFilterError
+from ansible.errors import AnsibleFilterError
 from ansible.module_utils.six import string_types
 from ansible.module_utils.common._collections_compat import Mapping, Sequence
 from collections import defaultdict
-from operator import itemgetter, attrgetter
+from operator import itemgetter
 import re
 import random
+
 
 def list_append(l, x=''):
     l.append(x)
     return l
 
+
 def list_extend(l, x=[]):
     l.extend(x)
     return l
+
 
 def list_insert(l, i=0, x=''):
     l.insert(i, x)
     return l
 
+
 def list_remove(l, x=''):
     l.remove(x)
     return l
+
 
 def list_pop(l, *i):
     if len(i) == 0:
@@ -34,10 +39,12 @@ def list_pop(l, *i):
     else:
         return l.pop(i[0])
 
+
 def list_clear(l):
     # l.clear()  # 'list' object has no attribute 'clear'
     del l[:]
     return l
+
 
 def list_index(l, x, *i):
     if len(i) == 0:
@@ -47,29 +54,37 @@ def list_index(l, x, *i):
     else:
         return l.index(x, i[0], i[1]) if x in l[i[0]:i[1]] else -1
 
+
 def list_count(l, x):
     return l.count(x)
- 
+
+
 def list_sort(l, ls_key=None, ls_reverse=False):
-    return sorted(l, key = ls_key, reverse = ls_reverse)
+    return sorted(l, key=ls_key, reverse=ls_reverse)
+
 
 def list_sort_list(l, index, ls_reverse=False):
-    return sorted(l, key = itemgetter(index), reverse = ls_reverse)
+    return sorted(l, key=itemgetter(index), reverse=ls_reverse)
+
 
 def list_sort_dict(l, attr, ls_reverse=False):
-    return sorted(l, key = lambda i: i[attr], reverse = ls_reverse)
+    return sorted(l, key=lambda i: i[attr], reverse=ls_reverse)
+
 
 def list_reverse(l):
     l.reverse()
     return l
 
+
 def list_copy(l):
     # l.copy()  # 'list' object has no attribute 'copy'
     return l[:]
 
+
 def list_search(l, x):
     r = re.compile(x)
     return list(filter(r.match, l))
+
 
 def list_flatten(l):
     flat_list = []
@@ -79,20 +94,24 @@ def list_flatten(l):
                 flat_list.append(item)
         else:
             flat_list.append(sublist)
-    l = flat_list
-    return l
+    return flat_list
 
-def list_sample(l,n):
-    return random.sample(l,n)
 
-def list_zip(l,k):
-    return zip(l,k)
+def list_sample(l, n):
+    return random.sample(l, n)
 
-def list_dict_zip(l,k):
-    return dict((x,y) for x,y in  zip(l,k))
 
-def list_dict_zip_rev(l,k):
-    return dict((y,x) for x,y in  zip(l,k))
+def list_zip(l, k):
+    return zip(l, k)
+
+
+def list_dict_zip(l, k):
+    return dict((x, y) for x, y in zip(l, k))
+
+
+def list_dict_zip_rev(l, k):
+    return dict((y, x) for x, y in zip(l, k))
+
 
 def list_list2dict(l):
     out = []
@@ -103,9 +122,11 @@ def list_list2dict(l):
         out.append(item)
     return out
 
+
 def list_split_period(l, p):
     split_list = []
-    for i in range(p, len(l)+p, p):
+    j = p
+    for i in range(p, len(l) + p, p):
         if i == p:
             split_list.append(l[0:p])
         elif i > len(l):
@@ -115,9 +136,10 @@ def list_split_period(l, p):
         j = i
     return split_list
 
+
 def list_select_list_bool(b, l, negative=False):
-    l2=[]
-    for bi,li in zip(b,l):
+    l2 = []
+    for bi, li in zip(b, l):
         if negative:
             if not bi:
                 l2.append(li)
@@ -126,14 +148,16 @@ def list_select_list_bool(b, l, negative=False):
                 l2.append(li)
     return l2
 
+
 def list_range(l):
     return [i for i in range(*l)]
 
-def list_wrapper(l, func):
-    return func(*l)
 
-def list_wrapper_comp(l, func):
-    return [i for i in func(*l)]
+# def list_wrapper(l, func):
+#     return func(*l)
+
+# def list_wrapper_comp(l, func):
+#     return [i for i in func(*l)]
 
 # Upstream: community.general
 def lists_mergeby(l1, l2, index):
@@ -160,6 +184,7 @@ def lists_mergeby(l1, l2, index):
             if index in elem.keys():
                 d[elem[index]].update(elem)
     return sorted(d.values(), key=itemgetter(index))
+
 
 def any2items(x, key='key', override=False):
     ''' Convert any input to list.
@@ -327,30 +352,31 @@ def any2items(x, key='key', override=False):
             if (not override) and any(key in list(value.keys()) for value in values):
                 raise AnsibleFilterError('Key %s present in the dictionary.' % (key))
             else:
-                l =  values
+                l_temp = values
                 for idx, item in enumerate(values):
-                   z = item.copy()
-                   z.update({key: keys[idx]})
-                   l[idx] = z
+                    z = item.copy()
+                    z.update({key: keys[idx]})
+                    l_temp[idx] = z
         else:
-            l = []
-            l.insert(0, x)
-        return l
+            l_temp = []
+            l_temp.insert(0, x)
+        return l_temp
     elif isinstance(x, string_types):
-        l = []
-        l.insert(0, x)
-        return l
+        l_temp = []
+        l_temp.insert(0, x)
+        return l_temp
     elif isinstance(x, Sequence):
-        l = list(x)
-        return l
+        l_temp = list(x)
+        return l_temp
     else:
-        l = []
-        l.insert(0, x)
-        return l
+        l_temp = []
+        l_temp.insert(0, x)
+        return l_temp
 
 
 def items2dict2(mylist, key_name='key', value_name='value', default_value=None):
-    ''' takes a list of dicts with each having a 'key' and 'value' keys, and transforms the list into a dictionary,                                                                                   effectively as the reverse of dict2items. If 'value_name' does not exist use 'default_value'.  '''
+    ''' takes a list of dicts with each having a 'key' and 'value' keys, and transforms the list into a dictionary,
+        effectively as the reverse of dict2items. If 'value_name' does not exist use 'default_value'.  '''
 
     if not isinstance(mylist, Sequence):
         raise AnsibleFilterError("First argument for community.general.items2dict2 requires a list. %s is %s" %
@@ -374,7 +400,6 @@ class FilterModule(object):
         5.1. More on Lists
         https://docs.python.org/3/tutorial/datastructures.html#more-on-lists
         Methods of list objects.'''
-
 
     def filters(self):
         return {
@@ -401,8 +426,8 @@ class FilterModule(object):
             'list_split_period': list_split_period,
             'list_select_list_bool': list_select_list_bool,
             'list_range': list_range,
-            'list_wrapper': list_wrapper,
-            'list_wrapper_comp': list_wrapper_comp,
+            # 'list_wrapper': list_wrapper,
+            # 'list_wrapper_comp': list_wrapper_comp,
             'lists_mergeby': lists_mergeby,
             'list_test': list_test,
             'any2items': any2items,

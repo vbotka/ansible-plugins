@@ -2,11 +2,10 @@ import os.path
 import re
 
 from ansible.plugins.inventory import BaseInventoryPlugin
-from ansible.inventory.group import Group
 
 
 PATH_PLACEHOLDER = 'IP_BASED_GROUPS'
-IP_RE = re.compile('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$')
+IP_RE = re.compile('^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$')
 
 
 class InventoryModule(BaseInventoryPlugin):
