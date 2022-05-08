@@ -3,7 +3,7 @@
 # 'Best way to modify json in ansible' Copyright 2017, stackoverflow.com
 # https://stackoverflow.com/questions/46025695/best-way-to-modify-json-in-ansible
 # CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/legalcode
-# Copyright 2021, Vladimir Botka <vbotka@gmail.com>
+# Copyright 2021-2022, Vladimir Botka <vbotka@gmail.com>
 # GNU General Public License v3.0+ https://www.gnu.org/licenses/gpl-3.0.txt
 # (https://www.gnu.org/licenses/license-compatibility.en.html)
 
@@ -55,7 +55,7 @@ requirements:
 # TODO: EXAMPLES, RETURN
 
 import json
-from ansible.module_utils.basic import AnsibleModule, missing_required_lib
+from ansible.module_utils.basic import AnsibleModule
 
 
 try:

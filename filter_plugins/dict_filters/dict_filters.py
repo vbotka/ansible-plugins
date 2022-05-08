@@ -1,15 +1,15 @@
-# All rights reserved (c) 2019-2021, Vladimir Botka <vbotka@gmail.com>
+# All rights reserved (c) 2019-2022, Vladimir Botka <vbotka@gmail.com>
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-from ansible.errors import AnsibleError, AnsibleFilterError
-from ansible.module_utils.six import string_types
+from ansible.errors import AnsibleFilterError
 from ansible.module_utils.common._collections_compat import Mapping, Sequence
 
 import sys
 import json
+
 
 def list_flatten(l):
     flat_list = []
@@ -19,13 +19,14 @@ def list_flatten(l):
                 flat_list.append(item)
         else:
             flat_list.append(sublist)
-    l = flat_list
-    return l
+    return flat_list
+
 
 def dict_merge(x, y):
     d = x.copy()
     d.update(y)
     return d
+
 
 def combine_lossless(x, y, flatten=False, unique=False):
     d = x.copy()
@@ -44,13 +45,15 @@ def combine_lossless(x, y, flatten=False, unique=False):
                     d[key] = [value, x[key]]
     return d
 
+
 def dict_merge_lossless(x, y, flatten=False, unique=False):
     combine_lossless(x, y, flatten, unique)
+
 
 def dict_add_dict(d1, d2, recursive=False):
     if recursive:
         for k, v in d2.items():
-            d1[k] = [d1[k],v]
+            d1[k] = [d1[k], v]
     else:
         for k, v in d2.items():
             d1[k] = v
@@ -58,18 +61,23 @@ def dict_add_dict(d1, d2, recursive=False):
         d1[k] = list_flatten(d1[k])
     return d1
 
+
 def dict_del_key(d, key):
     del d[key]
     return d
 
+
 def dict_keys(d):
     return list(d)
+
 
 def dict_sorted(d):
     return sorted(d)
 
+
 def dict_search_key(d, key):
     return key in d
+
 
 def dict_prefix_keys(d, prefix='prefix_'):
     d1 = {}
@@ -77,10 +85,12 @@ def dict_prefix_keys(d, prefix='prefix_'):
         d1[prefix + key] = d[key]
     return d1
 
+
 def dict_flatten(d, separator='.'):
     ''' Credit: Flattening JSON objects in Python by Amir Ziai
         https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10'''
     out = {}
+
     def flatten(x, name=''):
         if type(x) is dict:
             for a in x:
@@ -95,19 +105,23 @@ def dict_flatten(d, separator='.'):
     flatten(d)
     return out
 
+
 def dict_sortbysubkey(d, k):
     return sorted(d.items(), key=lambda x: x[1][k])
 
+
 def dict2list(d):
-    l = []
+    l_temp = []
     for i in d:
-        h = {i:d[i]}
-        l.append(h)
-    return l
+        h = {i: d[i]}
+        l_temp.append(h)
+    return l_temp
+
 
 def item2dict(t):
-    h = {t[0]:t[1]}
+    h = {t[0]: t[1]}
     return h
+
 
 def dict_select_list(d, l):
     d2 = {}
@@ -115,13 +129,16 @@ def dict_select_list(d, l):
         d2[k] = d[k]
     return d2
 
+
 def dict2hash(d):
     return hash(json.dumps(d, sort_keys=True)) % ((sys.maxsize + 1) * 2)
+
 
 def dict_add_hash(d, k='hash'):
     d2 = d
     d2[k] = hash(json.dumps(d, sort_keys=True))
     return d2
+
 
 def dict_attrs(d, attrs):
     ''' select attributes from dictionary. Example:

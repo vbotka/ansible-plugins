@@ -1,10 +1,12 @@
-# All rights reserved (c) 2019-2021, Vladimir Botka <vbotka@gmail.com>
+# All rights reserved (c) 2019-2022, Vladimir Botka <vbotka@gmail.com>
 # Simplified BSD License, https://opensource.org/licenses/BSD-2-Clause
 
-from datetime import date, datetime
+from datetime import datetime
+
 
 def datetime_epoch_strftime(epoch, format='%Y-%m-%d %H:%M:%S'):
     return datetime.fromtimestamp(float(epoch)).strftime(format)
+
 
 class FilterModule(object):
     ''' Ansible filters. Interface to Python datetime methods.
