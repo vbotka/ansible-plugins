@@ -20,6 +20,7 @@ Various Ansbile plugins.
 - **hash_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/hash_filters.yml)
 - **list_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/list_filters.yml)
 - **netaddr_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/netaddr_filters.yml)
+- **numpy_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/numpy_filters.yml)
 - **pandas_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/pandas_filters.yml)
 - **string_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/string_filters.yml)
 - **version_filters** see [examples](https://github.com/vbotka/ansible-plugins/blob/master/examples/version_filters.yml)
@@ -62,6 +63,7 @@ Various Ansbile plugins.
 - [list - Ways to sort list of dictionaries by values in Python – Using lambda function](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/)
 - [netaddr - A network address manipulation library for Python](https://pypi.org/project/netaddr/)
 - [netaddr - Python Network Programming](https://0xbharath.github.io/python-network-programming/index.html)
+- [numpy - NumPy: The fundamental package for scientific computing with Python](https://numpy.org/)
 - [pandas - Data analysis and manipulation tool](https://pandas.pydata.org/)
 - [sort - How to sort complex version numbers in Ansible](https://stackoverflow.com/questions/56063612/how-to-sort-complex-version-numbers-in-ansible/)
 - [string - String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
@@ -74,4 +76,4 @@ Various Ansbile plugins.
 
 ## Author Information
 
-[Vladimir Botka](https://botka.link)
+[Vladimir Botka](https://botka.info)

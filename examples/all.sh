@@ -14,6 +14,7 @@ ansible-playbook file_filters.yml
 ansible-playbook hash_filters.yml
 ansible-playbook list_filters.yml
 ansible-playbook netaddr_filters.yml -e test_netaddr=true
+ansible-playbook numpy_filters.yml -e test_numpy=true
 ansible-playbook string_filters.yml
 ansible-playbook pandas_filters.yml
 ansible-playbook version_filters.yml
