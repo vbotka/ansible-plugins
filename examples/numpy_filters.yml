@@ -17,35 +17,48 @@
       - [2, 5, 8]
       - [3, 6, 9]
 
+    arr3: [a, b, c, d, e]
+    idx: [1, 3, 4]
+
   tasks:
 
-    - name: numpy_transpose
-      block:
-        - name: numpy_transpose debug
-          debug:
-            msg: "{{ arr1|numpy_transpose()|from_yaml|to_yaml }}"
-          when: debug_numpy|default(false)|bool
-        - name: numpy_transpose assert
+    # numpy_transpose
+    - block:
+        - debug:
+            var: arr1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: arr|to_yaml
+          when: debug|d(false)|bool
+        - name: numpy_transpose
           assert:
-            that: "{{ arr1|numpy_transpose()|from_yaml == arr2 }}"
-          when: test_numpy|default(false)|bool
+            that: arr == result
+      vars:
+        arr: "{{ arr1|numpy_transpose }}"
+        result:
+          - [1, 4, 7]
+          - [2, 5, 8]
+          - [3, 6, 9]
       tags: numpy_transpose
 
-  # shell> ansible-playbook numpy_filters.yml -e debug_numpy=true \
-  #                                           -e test_numpy=true
-  #
-  # PLAY [nnumpy_filters] *******************************************
-  #
-  # TASK [numpy_transpose debug] ************************************
-  # ok: [localhost] =>
-  #   msg: |-
-  #     - [1, 4, 7]
-  #     - [2, 5, 8]
-  #     - [3, 6, 9]
-  #
-  # TASK [numpy_transpose assert] ***********************************
-  # ok: [localhost] => changed=false
-  #   msg: All assertions passed
+    # numpy_array_by_idx
+    - block:
+        - debug:
+            var: arr3|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: idx|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: arr|to_yaml
+          when: debug|d(false)|bool
+        - name: numpy_array_by_idx
+          assert:
+            that: arr == result
+      vars:
+        arr: "{{ arr3|numpy_array_by_idx(idx) }}"
+        result: [b, d, e]
+      tags: numpy_array_by_idx
 
 # EOF
 ...

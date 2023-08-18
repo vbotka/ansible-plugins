@@ -13,10 +13,13 @@ def pandas_json_normalize(d):
     return(l_temp)
 
 
-def pandas_duplicated(d, subset=None, keep='first'):
+def pandas_duplicated(d, subset=None, keep='first', idx=False):
     df = pd.DataFrame(d)
     d_temp = df.duplicated(subset=subset, keep=keep).to_dict()
-    return(d_temp)
+    if idx:
+        return([k for k, v in d_temp.items() if v])
+    else:
+        return(d_temp)
 
 
 def pandas_idx_duplicated(l, keep='first'):

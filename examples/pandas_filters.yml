@@ -204,6 +204,50 @@
           4: false
       tags: duplicated_2
 
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicated
+          when: debug|d(false)|bool
+        - name: "No.22 pandas_duplicated: idx=True"
+          assert:
+            that: duplicated == result
+            fail_msg: |
+              No.22 pandas_duplicated: Failed.
+              duplicated:
+                {{ duplicated|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        duplicated: "{{ list1|pandas_duplicated(idx=True) }}"
+        result: [3]
+      tags: duplicated_3
+
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicated|to_yaml
+          when: debug|d(false)|bool
+        - name: "No.23 pandas_duplicated: umpy_array_by_idx(idx)"
+          assert:
+            that: duplicated == result
+            fail_msg: |
+              No.23 pandas_duplicated: Failed.
+              duplicated:
+                {{ duplicated|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        idx: "{{ list1|pandas_duplicated(idx=True) }}"
+        duplicated: "{{ list1|numpy_array_by_idx(idx) }}"
+        result:
+          - {name: SOMEITEM-A03, policy: three, type: random}
+      tags: duplicated_4
+
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # pandas_idx_duplicated
     - block:
