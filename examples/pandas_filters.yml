@@ -6,6 +6,7 @@
   gather_facts: false
 
   vars:
+
     d1:
       key1: val1
       key2: val2
@@ -16,79 +17,289 @@
           sub2key1: sub2val1
           sub2key2: sub2val2
 
+    list1:
+      - {name: SOMEITEM-A01, type: random, policy: one}
+      - {name: SOMEITEM-A02, type: random, policy: two}
+      - {name: SOMEITEM-A03, type: random, policy: three}
+      - {name: SOMEITEM-A03, type: random, policy: three}
+      - {name: SOMEITEM-A04, type: random, policy: four}
+
+    list2: [lama, cow, lama, beetle, lama]
+
   tasks:
 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # pandas_json_normalize
     - block:
-        - name: "No.1 pandas_json_normalize: Create lists."
-          debug:
-            var: _list
-          vars:
-            _list: "{{ d1|pandas_json_normalize }}"
-        - assert:
-            that: _list == _result
-          vars:
-            _list: "{{ d1|pandas_json_normalize }}"
-            _result:
-              - - key1
-                - key2
-                - key3.subkey1
-                - key3.subkey2
-                - key3.subkey3.sub2key1
-                - key3.subkey3.sub2key2
-              - - val1
-                - val2
-                - subval1
-                - subval2
-                - sub2val1
-                - sub2val2
-      tags: json_normalize_list
+        - debug:
+            var: d1
+          when: debug|d(false)|bool
+        - debug:
+            var: normalize
+          when: debug|d(false)|bool
+        - name: "No.10 pandas_json_normalize:"
+          assert:
+            that: normalize == result
+            fail_msg: |
+              No.10 pandas_json_normalize: Failed.
+              normalize:
+                {{ normalize|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        normalize: "{{ d1|pandas_json_normalize }}"
+        result:
+          - - key1
+            - key2
+            - key3.subkey1
+            - key3.subkey2
+            - key3.subkey3.sub2key1
+            - key3.subkey3.sub2key2
+          - - val1
+            - val2
+            - subval1
+            - subval2
+            - sub2val1
+            - sub2val2
+      tags: json_normalize_0
 
     - block:
-        - name: "No.2 pandas_json_normalize:  Create dictionary."
-          debug:
+        - debug:
+            var: d1
+          when: debug|d(false)|bool
+        - debug:
             var: _dict
-          vars:
-            _list: "{{ d1|pandas_json_normalize }}"
-            _dict: "{{ dict(_list.0|zip(_list.1)) }}"
-        - assert:
-            that: _dict == _result
-          vars:
-            _list: "{{ d1|pandas_json_normalize }}"
-            _dict: "{{ dict(_list.0|zip(_list.1)) }}"
-            _result:
-              key1: val1
-              key2: val2
-              key3.subkey1: subval1
-              key3.subkey2: subval2
-              key3.subkey3.sub2key1: sub2val1
-              key3.subkey3.sub2key2: sub2val2
-      tags: json_normalize_dict
+          when: debug|d(false)|bool
+        - name: "No.11 pandas_json_normalize: Create dictionary."
+          assert:
+            that: _dict == result
+            fail_msg: |
+              No.11 pandas_json_normalize: Failed.
+              _dict:
+                {{ _dict|to_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        normalize: "{{ d1|pandas_json_normalize }}"
+        _dict: "{{ dict(normalize.0|zip(normalize.1)) }}"
+        result:
+          key1: val1
+          key2: val2
+          key3.subkey1: subval1
+          key3.subkey2: subval2
+          key3.subkey3.sub2key1: sub2val1
+          key3.subkey3.sub2key2: sub2val2
+      tags: json_normalize_1
 
     - block:
-        - name: "No.3 pandas_json_normalize: Create dictionary. Simple keys."
-          debug:
+        - debug:
+            var: d1
+          when: debug|d(false)|bool
+        - debug:
             var: _dict
-          vars:
-            _list: "{{ d1|pandas_json_normalize }}"
-            _regex: '^(.*)\.(.*)$'
-            _replace: '\2'
-            _keys: "{{ _list.0|map('regex_replace', _regex, _replace)|list }}"
-            _dict: "{{ dict(_keys|zip(_list.1)) }}"
-        - assert:
-            that: _dict == _result
-          vars:
-            _list: "{{ d1|pandas_json_normalize }}"
-            _regex: '^(.*)\.(.*)$'
-            _replace: '\2'
-            _keys: "{{ _list.0|map('regex_replace', _regex, _replace)|list }}"
-            _dict: "{{ dict(_keys|zip(_list.1)) }}"
-            _result:
-              key1: val1
-              key2: val2
-              sub2key1: sub2val1
-              sub2key2: sub2val2
-              subkey1: subval1
-              subkey2: subval2
-      tags: json_normalize_dict_baseattr
+          when: debug|d(false)|bool
+        - name: "No.12 pandas_json_normalize: Create dictionary. Simple keys."
+          assert:
+            that: _dict == result
+            fail_msg: |
+              No.12 pandas_json_normalize: Failed.
+              _dict:
+                {{ _dict|to_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        normalize: "{{ d1|pandas_json_normalize }}"
+        _regex: '^(.*)\.(.*)$'
+        _replace: '\2'
+        _keys: "{{ normalize.0|map('regex_replace', _regex, _replace)|list }}"
+        _dict: "{{ dict(_keys|zip(normalize.1)) }}"
+        result:
+          key1: val1
+          key2: val2
+          sub2key1: sub2val1
+          sub2key2: sub2val2
+          subkey1: subval1
+          subkey2: subval2
+      tags: json_normalize_2
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # pandas_duplicated
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicated
+          when: debug|d(false)|bool
+        - name: "No.20 pandas_duplicated: Debug implicit subset=None"
+          assert:
+            that: duplicated == result
+            fail_msg: |
+              No.20 pandas_duplicated: Failed.
+              duplicated:
+                {{ duplicated|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        list1_keys: "{{ list1.0.keys()|list }}"
+        duplicated: "{{ list1|pandas_duplicated }}"
+        result:
+          0: false
+          1: false
+          2: false
+          3: true
+          4: false
+      tags: duplicated_0
+
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicated
+          when: debug|d(false)|bool
+        - name: "No.21 pandas_duplicated: subset=['type']"
+          assert:
+            that: duplicated == result
+            fail_msg: |
+              No.21 pandas_duplicated: Failed.
+              duplicated:
+                {{ duplicated|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        duplicated: "{{ list1|pandas_duplicated(subset=['type']) }}"
+        result:
+          0: false
+          1: true
+          2: true
+          3: true
+          4: true
+      tags: duplicated_1
+
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicated
+          when: debug|d(false)|bool
+        - name: "No.22 pandas_duplicated: subset=list1_keys"
+          assert:
+            that: duplicated == result
+            fail_msg: |
+              No.22 pandas_duplicated: Failed.
+              duplicated:
+                {{ duplicated|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        list1_keys: "{{ list1.0.keys()|list }}"
+        duplicated: "{{ list1|pandas_duplicated(subset=list1_keys) }}"
+        result:
+          0: false
+          1: false
+          2: false
+          3: true
+          4: false
+      tags: duplicated_2
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # pandas_idx_duplicated
+    - block:
+        - debug:
+            var: list2|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicated|to_yaml
+          when: debug|d(false)|bool
+        - name: "No.30 pandas_idx_duplicated:"
+          assert:
+            that: duplicated == result
+            fail_msg: |
+              No.30 pandas_idx_duplicated: Failed.
+              duplicated:
+                {{ duplicated|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        duplicated: "{{ list2|pandas_idx_duplicated }}"
+        result: [false, false, true, false, true]
+      tags: idx_duplicated_0
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # pandas_drop_duplicates
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicates|to_yaml
+          when: debug|d(false)|bool
+        - name: "No.40 pandas_drop_duplicates: implicit subset=None"
+          assert:
+            that: duplicates == result
+            fail_msg: |
+              No.22 pandas_drop_duplicates: Failed.
+              duplicates:
+                {{ duplicates|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        duplicates: "{{ list1|pandas_drop_duplicates }}"
+        result:
+          - {name: SOMEITEM-A01, policy: one, type: random}
+          - {name: SOMEITEM-A02, policy: two, type: random}
+          - {name: SOMEITEM-A03, policy: three, type: random}
+          - {name: SOMEITEM-A04, policy: four, type: random}
+      tags: drop_duplicates_0
+
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicates|to_yaml
+          when: debug|d(false)|bool
+        - name: "No.41 pandas_drop_duplicates: implicit subset=['type']"
+          assert:
+            that: duplicates == result
+            fail_msg: |
+              No.41 pandas_drop_duplicates: Failed.
+              duplicates:
+                {{ duplicates|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        duplicates: "{{ list1|pandas_drop_duplicates(subset=['type']) }}"
+        result:
+          - {name: SOMEITEM-A01, policy: one, type: random}
+      tags: drop_duplicates_1
+
+    - block:
+        - debug:
+            var: list1|to_yaml
+          when: debug|d(false)|bool
+        - debug:
+            var: duplicates|to_yaml
+          when: debug|d(false)|bool
+        - name: "No.42 pandas_drop_duplicates: implicit subset=list1_keys"
+          assert:
+            that: duplicates == result
+            fail_msg: |
+              No.42 pandas_drop_duplicates: Failed.
+              duplicates:
+                {{ duplicates|to_nice_yaml(indent=2)|indent(2) }}
+              result:
+                {{ result|to_yaml(indent=2)|indent(2) }}
+      vars:
+        list1_keys: "{{ list1.0.keys()|list }}"
+        duplicates: "{{ list1|pandas_drop_duplicates(subset=list1_keys) }}"
+        result:
+          - {name: SOMEITEM-A01, policy: one, type: random}
+          - {name: SOMEITEM-A02, policy: two, type: random}
+          - {name: SOMEITEM-A03, policy: three, type: random}
+          - {name: SOMEITEM-A04, policy: four, type: random}
+      tags: drop_duplicates_2
 
 # EOF
